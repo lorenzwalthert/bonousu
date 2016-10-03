@@ -1,1 +1,1 @@
-*Bono usu* in latin, or *good practice* in english: That is what this book aims to impart to the reader regarding R programming. 
+*Bono usu* in latin, or *good practice* in english: That is what this book aims to impart to the reader regarding R programming. The built book is available [here](https://lorenzwalthert.github.io/bonousu/).
