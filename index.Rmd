@@ -1,6 +1,6 @@
 ---
 title: "Bono Usu"
-subtitle: "A guide of good practice in R programming"
+subtitle: "A guide for good practice in R programming"
 author: "Jon Calder & Lorenz Walthert"
 site: bookdown::bookdown_site
 documentclass: book
@@ -11,4 +11,5 @@ output:
 
 # Preface 
 
-*Bono usu* in latin, or *good practice* in english: That is what this book aims to impart to the reader regarding R programming. 
+*Bono usu* is Latin for *good practice*. The aim of this book is to outline some 
+good practice for R programming.
