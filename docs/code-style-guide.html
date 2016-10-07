@@ -8,7 +8,7 @@
   <title>Bono Usu</title>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Bono Usu">
-  <meta name="generator" content="bookdown 0.1.14 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.1 and GitBook 2.6.7">
 
   <meta property="og:title" content="Bono Usu" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,6 @@
 
 <meta name="author" content="Jon Calder &amp; Lorenz Walthert">
 
-  
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -152,7 +151,7 @@ a ==<span class="st"> </span>b</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">varname &lt;-<span class="st"> &quot;index&quot;</span>
 found &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;n&#39;t &quot;</span>, <span class="st">&quot;&quot;</span>), <span class="dt">size =</span> <span class="dv">1</span>)
 <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;the variable &#39;&quot;</span>, varname, <span class="st">&quot;&#39; was&quot;</span>, found, <span class="st">&quot; found&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>))</code></pre></div>
-<pre><code>## [1] &quot;the variable &#39;index&#39; was found&quot;</code></pre>
+<pre><code>## [1] &quot;the variable &#39;index&#39; wasn&#39;t  found&quot;</code></pre>
 <p>Note that in this example, single quotes behave just like any other character. Hence, is not necessary to <em>close</em> an open single quote. This allows us to also use them as contraction in <code>varname</code> without escape. Depending on whether or not compatibility with other programming languages is required, double quotes are probably also a safer option in certain cases.<br />
 <br />
 For these reasons, we advise the use of double quotes, so all strings are wrapped in the same type of quotes.</p>
