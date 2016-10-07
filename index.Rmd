@@ -9,6 +9,6 @@ output:
   bookdown::pdf_book: default
 ---
 
-# Preface 
+# Preface {-}
 
 *Bono usu* in latin, or *good practice* in english: That is what this book aims to impart to the reader regarding R programming. 
