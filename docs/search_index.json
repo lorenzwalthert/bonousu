@@ -1,3 +1,7 @@
 [
-["index.html", "Bono Usu 1 Preface", " Bono Usu A guide for good practice in R programming Jon Calder &amp; Lorenz Walthert 1 Preface Bono usu is Latin for good practice. The aim of this book is to outline some good practice for R programming. "]
+["index.html", "Bono Usu Preface", " Bono Usu A guide for good practice in R programming Jon Calder &amp; Lorenz Walthert Preface Bono usu is Latin for good practice. The aim of this book is to outline some good practice for R programming. "],
+["introduction.html", "1 Introduction", " 1 Introduction "],
+["code-style-guide.html", "2 Code style guide", " 2 Code style guide "],
+["workflow-collaboration.html", "3 Workflow &amp; collaboration", " 3 Workflow &amp; collaboration "],
+["package-development.html", "4 Package development", " 4 Package development "]
 ]
