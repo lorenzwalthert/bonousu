@@ -1,1 +1,15 @@
 # Introduction
+Welcome to *bono usu*, a book about good practice for R programming. This book
+tries to compile and extend resources on the topic of good practice in R
+programming in a rather borad sense. Since in many regards, there is no best
+practice, the aim of the book is to impart at least good practice. 
+
+\
+The book covers the following topics:
+
+* Code style guide: This chapter is about low level style use in R. 
+* Workflow & collaboration: In this chapter, we introduce some commonly used
+workflow tools and how one can make the most of them as well as more high-level
+practices in project organizations.
+* Package development: Finally, we address the topic of developing extensions 
+for R. 

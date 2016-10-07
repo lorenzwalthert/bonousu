@@ -1,1 +1,60 @@
 # Code style guide
+This chapter deals mostly with low-level coding style. Every section starts 
+with a code junk to quickly summarize the conclusion of the section. Depending 
+on how strongly we agree/disagree of a certain practice, we use `# good / bad` 
+or `# adviced / discouraged` to indicate the importance of abiding by a certain
+style. 
+\
+After the summary, the pros and cons of certain approaches are 
+discussed more in depth.
+
+## Assignment
+```{r}
+# good
+a <- 2
+# bad 
+a = 2
+```
+Although programmers coming from other languages may not immediately see
+the benefit of using the so called *assignment operator* instead of the equal
+sign, the main advantage is that that an *asignment context* can be clearly 
+distinguished from other contexts, for example from a function call and from 
+a comparison of two objects:
+```{r, eval = FALSE}
+f(a = 1, b = TRUE)
+a == b
+```
+
+
+## Quotes
+```{r, eval = FALSE}
+# adviced
+"double quotes"
+# discouraged
+'single quotes'
+```
+
+In R, both double quotes and single quotes are available. The advantage of 
+single quotes is that they result in a slightly cleaner visual representation of
+the code. 
+```{r, eval = FALSE}
+print('this is nice'); print("this is a bit less clean")
+```
+On the other hand, double quotes can be used to enclose single quotes, whereas
+the reverse is not possible. This can be useful to create a string like the 
+following:
+```{r}
+varname <- "index"
+found <- sample(c("n't ", ""), size = 1)
+print(paste("the variable '", varname, "' was", found, " found", sep = ""))
+```
+Note that in this example, single quotes behave just like any other character. 
+Hence, is not necessary to *close* an open single quote. 
+This allows us to also use them as contraction in `varname` without escape. 
+Depending on whether 
+or not compatibility with other programming languages is required, double 
+quotes are probably also a saver option in certain cases.
+\
+For these reasons, we advise the use of double quotes, so all strings are 
+wrapped
+in the same type of quotes.
