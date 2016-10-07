@@ -8,7 +8,7 @@
   <title>Bono Usu</title>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Bono Usu">
-  <meta name="generator" content="bookdown 0.1 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.1.14 and GitBook 2.6.7">
 
   <meta property="og:title" content="Bono Usu" />
   <meta property="og:type" content="book" />
@@ -25,6 +25,7 @@
 
 <meta name="author" content="Jon Calder &amp; Lorenz Walthert">
 
+  
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -126,7 +127,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="code-style-guide" class="section level1">
 <h1><span class="header-section-number">2</span> Code style guide</h1>
-<p>This chapter deals mostly with low-level coding style. Every section starts with a code junk to quickly summarize the conclusion of the section. Depending on how strongly we agree/disagree of a certain practice, we use <code># good / bad</code> or <code># adviced / discouraged</code> to indicate the importance of abiding by a certain style.<br />
+<p>This chapter deals mostly with low-level coding style. Every section starts with a code chunk to quickly highlight the principle of that section. Depending on how strongly we agree/disagree with a certain practice, we use <code># good / bad</code> or <code># advised / discouraged</code> to indicate the importance of adhering to a certain style.<br />
+<br />
 After the summary, the pros and cons of certain approaches are discussed more in depth.</p>
 <div id="assignment" class="section level2">
 <h2><span class="header-section-number">2.1</span> Assignment</h2>
@@ -134,13 +136,13 @@ After the summary, the pros and cons of certain approaches are discussed more in
 a &lt;-<span class="st"> </span><span class="dv">2</span>
 <span class="co"># bad </span>
 a =<span class="st"> </span><span class="dv">2</span></code></pre></div>
-<p>Although programmers coming from other languages may not immediately see the benefit of using the so called <em>assignment operator</em> instead of the equal sign, the main advantage is that that an <em>asignment context</em> can be clearly distinguished from other contexts, for example from a function call and from a comparison of two objects:</p>
+<p>Although programmers coming from other languages may not immediately see the benefit of using the so called <em>assignment operator</em> instead of the equals sign, the main advantage is that that an <em>asignment context</em> can be clearly distinguished from other contexts, for example from a function call and from a comparison of two objects:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">f</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="ot">TRUE</span>)
 a ==<span class="st"> </span>b</code></pre></div>
 </div>
 <div id="quotes" class="section level2">
 <h2><span class="header-section-number">2.2</span> Quotes</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># adviced</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># advised</span>
 <span class="st">&quot;double quotes&quot;</span>
 <span class="co"># discouraged</span>
 <span class="st">&#39;single quotes&#39;</span></code></pre></div>
@@ -150,8 +152,9 @@ a ==<span class="st"> </span>b</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">varname &lt;-<span class="st"> &quot;index&quot;</span>
 found &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;n&#39;t &quot;</span>, <span class="st">&quot;&quot;</span>), <span class="dt">size =</span> <span class="dv">1</span>)
 <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;the variable &#39;&quot;</span>, varname, <span class="st">&quot;&#39; was&quot;</span>, found, <span class="st">&quot; found&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>))</code></pre></div>
-<pre><code>## [1] &quot;the variable &#39;index&#39; wasn&#39;t  found&quot;</code></pre>
-<p>Note that in this example, single quotes behave just like any other character. Hence, is not necessary to <em>close</em> an open single quote. This allows us to also use them as contraction in <code>varname</code> without escape. Depending on whether or not compatibility with other programming languages is required, double quotes are probably also a saver option in certain cases.<br />
+<pre><code>## [1] &quot;the variable &#39;index&#39; was found&quot;</code></pre>
+<p>Note that in this example, single quotes behave just like any other character. Hence, is not necessary to <em>close</em> an open single quote. This allows us to also use them as contraction in <code>varname</code> without escape. Depending on whether or not compatibility with other programming languages is required, double quotes are probably also a safer option in certain cases.<br />
+<br />
 For these reasons, we advise the use of double quotes, so all strings are wrapped in the same type of quotes.</p>
 
 </div>
