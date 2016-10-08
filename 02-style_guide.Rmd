@@ -73,29 +73,27 @@ following considerations are worth taking into account:
 * Always use the same spelling of extensions. Although `xzy.r` and `xyz.R` 
   are both recognized as R files, we recommend the latter.
 
-To sum it up, we here are a couple of bad examples for the cases described 
-above.
+To sum it up, here are a couple of bad examples for the cases described 
+above. 
 ```{r, eval = FALSE}
-# synonyms
-quick_data_check.R 
-fast_data_check.R
 # version number in file name
 cleaning_3.R
-# case-sensitivity
-check_input.R
-Check_Input.R
-# suffix
-convert_id.r
-convert_id.R
 # special character
 is_it_correct?.Rmd
-# format
-2016-02-15_tidy.RDS
-15_Feb2016.csv
+
 # length
 this_name_is_expressive_but_will_always_be_truncated_and_hence_useless.pdf
 # (uncommon) abbreviations
 vp8rm_fs.R
+```
+Do not use these pairs of examples simultaniously.
+```{r, eval = FALSE}
+# avoid synonyms
+quick_data_check.R 
+fast_data_check.R
+# stick to one format
+2016-02-15_tidy.RDS
+15_Feb2016.csv
 ```
 On the other hand, these file names meet the criteria outlined before.
 ```{r, eval = FALSE}
