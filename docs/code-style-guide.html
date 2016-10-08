@@ -102,8 +102,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="code-style-guide.html"><a href="code-style-guide.html"><i class="fa fa-check"></i><b>2</b> Code style guide</a><ul>
-<li class="chapter" data-level="2.1" data-path="code-style-guide.html"><a href="code-style-guide.html#assignment"><i class="fa fa-check"></i><b>2.1</b> Assignment</a></li>
-<li class="chapter" data-level="2.2" data-path="code-style-guide.html"><a href="code-style-guide.html#quotes"><i class="fa fa-check"></i><b>2.2</b> Quotes</a></li>
+<li class="chapter" data-level="2.1" data-path="code-style-guide.html"><a href="code-style-guide.html#naming"><i class="fa fa-check"></i><b>2.1</b> Naming</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="code-style-guide.html"><a href="code-style-guide.html#naming-files"><i class="fa fa-check"></i><b>2.1.1</b> Naming files</a></li>
+<li class="chapter" data-level="2.1.2" data-path="code-style-guide.html"><a href="code-style-guide.html#naming-objects"><i class="fa fa-check"></i><b>2.1.2</b> Naming objects</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="code-style-guide.html"><a href="code-style-guide.html#assignment"><i class="fa fa-check"></i><b>2.2</b> Assignment</a></li>
+<li class="chapter" data-level="2.3" data-path="code-style-guide.html"><a href="code-style-guide.html#quotes"><i class="fa fa-check"></i><b>2.3</b> Quotes</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="workflow-collaboration.html"><a href="workflow-collaboration.html"><i class="fa fa-check"></i><b>3</b> Workflow &amp; collaboration</a></li>
 <li class="chapter" data-level="4" data-path="package-development.html"><a href="package-development.html"><i class="fa fa-check"></i><b>4</b> Package development</a></li>
@@ -129,25 +133,113 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>This chapter deals mostly with low-level coding style. Every section starts with a code chunk to quickly highlight the principle of that section. Depending on how strongly we agree/disagree with a certain practice, we use <code># good / bad</code> or <code># advised / discouraged</code> to indicate the importance of adhering to a certain style.<br />
 <br />
 After the summary, the pros and cons of certain approaches are discussed more in depth.</p>
+<div id="naming" class="section level2">
+<h2><span class="header-section-number">2.1</span> Naming</h2>
+<div id="naming-files" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Naming files</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
+reduce_matrix.R
+<span class="co"># bad</span>
+rM_1.r</code></pre></div>
+<p>At the point of creating files, it is important to choose a good name. The same applies for the directory where it is stored. Changing the name or location of a file later can cause a number of problems:</p>
+<ul>
+<li>outdated dependenicies due to invalid paths.</li>
+<li>removed history in the version control system if renaming is not done properly (e.g. not with <code>git mv</code>).</li>
+<li>discontinuity in the history. It is hard to find renamed files.</li>
+<li>processes that take the file name as an input and return an output that is related to this name are problematic. For example, when creating a html file of an Rmd file via <code>knittr()</code>, the created object has the same name (but a different suffix) as the Rmd file. If you change the name, the old html file will still be there but a new html file with the new name will also be there. Most likely, you need to clean up manually.</li>
+</ul>
+<p>Hence, you should avoid renaming files if possible. When naming files, the following considerations are worth taking into account:</p>
+<ul>
+<li>Sometimes, there are restrictions in place for file names (i.e. the package <code>testthat</code> used in package development requires all files with test to start with “test” and live in a particular folder).</li>
+<li>Do use expressive but concise names. Describe the function of the file (<code>clean-temperatur_data.R</code>), what it inputs or outputs (<code>daily_to_monthly_transformation.R</code>), how it relates to other files (e.g. <code>helper_sort.R</code> is a helper function for a sort routine) and so on.</li>
+<li>Do not use version numbers in the file name. Use a version control system like git instead.</li>
+<li>Use all lower case names. It saves typing. Separate elements of the name with an underscore.</li>
+<li>It can be advantageous to use a combination of numers and descriptive words as a file name. This allows you to a) select files efficiently with bash or even keyboard navigation in a user interface and b) can be informative if you want to maintain a certain order of the files (e.g. if scripts have to be run in a certain) order. However, note that if you use this system, you need to change the name of files if you want to insert an element at a position other than the end of the sequence.</li>
+<li>Since some systems are not case-sensitive, do not use filenames that only differ in the case of the characters (e.g. <code>readme.md</code> and <code>README.md</code>).</li>
+<li>Choose unique file names, even accross directories. This avoids confusion and allows you to find the file you are looking for very quickly with a search function or <em>go to</em> command such as the one in RStudio.</li>
+<li>Try to avoid using special characters (like ?, \ etc.) since they are not allowed, can cause compatibility issues, need to be escaped and so forth.</li>
+<li>Files with extremely long names might be very expressive, but that comes at a cost: They are not memorable, often truncated for displaying and hence not really helpful anymore.</li>
+<li>Short and concise names are preferrable but do refrain from using abbreviations since that makes it hard for people to understand them if they lack prior or implict knowledge about your code. If it is absolutely inevitable, provide a dictionary and a reference to it in the readme file.</li>
+<li>stick to a format if the content you are naming has one. I.e. if your files refer to specific dates or times, always use the same respresentation, e.g YYMMDD. Other examples are names (firstname_lastname).</li>
+<li>Do not use synonoms, mix British or American English etc.</li>
+<li>Always use the same spelling of extensions. Although <code>xzy.r</code> and <code>xyz.R</code> are both recognized as R files, we recommend the latter.</li>
+</ul>
+<p>To sum it up, we here are a couple of bad examples for the cases described above.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># synonyms</span>
+quick_data_check.R 
+fast_data_check.R
+<span class="co"># version number in file name</span>
+cleaning_3.R
+<span class="co"># case-sensitivity</span>
+check_input.R
+Check_Input.R
+<span class="co"># suffix</span>
+convert_id.r
+convert_id.R
+<span class="co"># special character</span>
+is_it_correct?.Rmd
+<span class="co"># format</span>
+<span class="dv">2016-02</span>-15_tidy.RDS
+15_Feb2016.csv
+<span class="co"># length</span>
+this_name_is_expressive_but_will_always_be_truncated_and_hence_useless.pdf
+<span class="co"># (uncommon) abbreviations</span>
+vp8rm_fs.R</code></pre></div>
+<p>On the other hand, these file names meet the criteria outlined before.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># lower case names</span>
+showcase_outlier.Rmd
+<span class="co"># underscore as a separator</span>
+combine_a_and_b.R
+<span class="co"># files in order</span>
+<span class="dv">01</span>-get_data.R
+<span class="dv">02</span>-clean_data.R
+<span class="dv">03</span>-visualize_data.R
+<span class="co"># uppercase extension for R</span>
+for_mint.R</code></pre></div>
+</div>
+<div id="naming-objects" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Naming objects</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
+reduce_matrix <span class="co"># for a function</span>
+reduced_matrix <span class="co"># for a variable</span>
+<span class="co"># bad</span>
+convert.characters <span class="co"># resembles S3 method</span></code></pre></div>
+<p>A lot of rules that described in the above section apply for naming objects (in the sense of bindings within namespaces) as well. In particular we would like to highlight the following:</p>
+<ul>
+<li>use verbs for functions and nouns for variables. This helps you distinguish objects into categories.</li>
+<li>do not use the dot within object names. It gives them the appearance of methods</li>
+<li>Avoid function names and variable names that already exist or have a particular meaning. For example, <code>data()</code> is a function in base R, so it might be easier to call your data <code>x</code>, <code>dta</code>, <code>raw</code> etc. Here are a couple of other examples.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">F &lt;-<span class="st"> </span><span class="ot">NULL</span>
+list &lt;-<span class="st"> &quot;not an actual list&quot;</span>
+mean &lt;-<span class="st"> &quot;I mean he is not nice, he is quite the opposite&quot;</span>
+sum &lt;-<span class="st"> </span>function(...) <span class="kw">summarize</span>(...)</code></pre></div>
+<ul>
+<li>Think about how scoping rules might affect your code and name wisely.</li>
+</ul>
+</div>
+</div>
 <div id="assignment" class="section level2">
-<h2><span class="header-section-number">2.1</span> Assignment</h2>
+<h2><span class="header-section-number">2.2</span> Assignment</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
 a &lt;-<span class="st"> </span><span class="dv">2</span>
 <span class="co"># bad </span>
 a =<span class="st"> </span><span class="dv">2</span></code></pre></div>
-<p>Although programmers coming from other languages may not immediately see the benefit of using the so called <em>assignment operator</em> instead of the equals sign, the main advantage is that that an <em>asignment context</em> can be clearly distinguished from other contexts, for example from a function call and from a comparison of two objects:</p>
+<p>Although programmers coming from other languages may not immediately see the benefit of using the so called <em>assignment operator</em> instead of the equals sign, the main advantage is that that an <em>asignment context</em> can be distinguished with ease from other contexts, for example from a function call, from a list creation and from a comparison of two objects.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">f</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="ot">TRUE</span>)
+<span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span>:<span class="dv">3</span>, 
+     <span class="dt">b =</span> <span class="kw">sample</span>(letters[<span class="dv">1</span>:<span class="dv">4</span>]))
 a ==<span class="st"> </span>b</code></pre></div>
 </div>
 <div id="quotes" class="section level2">
-<h2><span class="header-section-number">2.2</span> Quotes</h2>
+<h2><span class="header-section-number">2.3</span> Quotes</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># advised</span>
 <span class="st">&quot;double quotes&quot;</span>
 <span class="co"># discouraged</span>
 <span class="st">&#39;single quotes&#39;</span></code></pre></div>
 <p>In R, both double quotes and single quotes are available. The advantage of single quotes is that they result in a slightly cleaner visual representation of the code.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">&#39;this is nice&#39;</span>); <span class="kw">print</span>(<span class="st">&quot;this is a bit less clean&quot;</span>)</code></pre></div>
-<p>On the other hand, double quotes can be used to enclose single quotes, whereas the reverse is not possible. This can be useful to create a string like the following:</p>
+<p>On the other hand, double quotes can be used to enclose single quotes, whereas the reverse is not possible. This can be useful to create a string like the following.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">varname &lt;-<span class="st"> &quot;index&quot;</span>
 found &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;n&#39;t &quot;</span>, <span class="st">&quot;&quot;</span>), <span class="dt">size =</span> <span class="dv">1</span>)
 <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;the variable &#39;&quot;</span>, varname, <span class="st">&quot;&#39; was&quot;</span>, found, <span class="st">&quot; found&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>))</code></pre></div>
