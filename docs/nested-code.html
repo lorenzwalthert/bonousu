@@ -32,7 +32,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="line-indentation.html">
+<link rel="prev" href="commenting-code.html">
 <link rel="next" href="conditional-statements.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -109,9 +109,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.2" data-path="assignment.html"><a href="assignment.html"><i class="fa fa-check"></i><b>2.2</b> Assignment</a></li>
 <li class="chapter" data-level="2.3" data-path="quotes.html"><a href="quotes.html"><i class="fa fa-check"></i><b>2.3</b> Quotes</a></li>
 <li class="chapter" data-level="2.4" data-path="line-indentation.html"><a href="line-indentation.html"><i class="fa fa-check"></i><b>2.4</b> Line indentation</a></li>
-<li class="chapter" data-level="2.5" data-path="nested-code.html"><a href="nested-code.html"><i class="fa fa-check"></i><b>2.5</b> Nested code</a></li>
-<li class="chapter" data-level="2.6" data-path="conditional-statements.html"><a href="conditional-statements.html"><i class="fa fa-check"></i><b>2.6</b> Conditional statements</a></li>
-<li class="chapter" data-level="2.7" data-path="argument-specification.html"><a href="argument-specification.html"><i class="fa fa-check"></i><b>2.7</b> Argument specification</a></li>
+<li class="chapter" data-level="2.5" data-path="spacing.html"><a href="spacing.html"><i class="fa fa-check"></i><b>2.5</b> Spacing</a></li>
+<li class="chapter" data-level="2.6" data-path="line-length.html"><a href="line-length.html"><i class="fa fa-check"></i><b>2.6</b> Line length</a></li>
+<li class="chapter" data-level="2.7" data-path="commenting-code.html"><a href="commenting-code.html"><i class="fa fa-check"></i><b>2.7</b> Commenting code</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="commenting-code.html"><a href="commenting-code.html#structuring-code"><i class="fa fa-check"></i><b>2.7.1</b> Structuring code</a></li>
+<li class="chapter" data-level="2.7.2" data-path="commenting-code.html"><a href="commenting-code.html#explaining-code"><i class="fa fa-check"></i><b>2.7.2</b> Explaining code</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="nested-code.html"><a href="nested-code.html"><i class="fa fa-check"></i><b>2.8</b> Nested code</a></li>
+<li class="chapter" data-level="2.9" data-path="conditional-statements.html"><a href="conditional-statements.html"><i class="fa fa-check"></i><b>2.9</b> Conditional statements</a></li>
+<li class="chapter" data-level="2.10" data-path="argument-specification.html"><a href="argument-specification.html"><i class="fa fa-check"></i><b>2.10</b> Argument specification</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="workflow-collaboration.html"><a href="workflow-collaboration.html"><i class="fa fa-check"></i><b>3</b> Workflow &amp; collaboration</a></li>
 <li class="chapter" data-level="4" data-path="package-development.html"><a href="package-development.html"><i class="fa fa-check"></i><b>4</b> Package development</a></li>
@@ -133,7 +139,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="nested-code" class="section level2">
-<h2><span class="header-section-number">2.5</span> Nested code</h2>
+<h2><span class="header-section-number">2.8</span> Nested code</h2>
 <p>Line indentation is great, but if you hit the third level of nesting, you should maybe consider an approach that does not require so many sub-levels of code.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># bad</span>
 if (x ==<span class="st"> </span><span class="ot">TRUE</span>){
@@ -142,14 +148,14 @@ if (x ==<span class="st"> </span><span class="ot">TRUE</span>){
       <span class="co"># ...</span>
     } else if (t ==<span class="st"> </span><span class="ot">TRUE</span>){
 <span class="co"># .... </span></code></pre></div>
-<p>In many cases, you can use functions to avoid nesting, in certain cases, the specific functions you want to create are <em>recursive functions</em>.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> A great way to get rid of nested code related to for loops is to replace them with functionals. We do not want to dive into that further here, since Hadley Wickham’s book <a href="http://adv-r.had.co.nz/Functionals.html">Advanced R</a> covers the material quite nicely. However, let us just quickly discuss an example in the context of good style.</p>
+<p>In many cases, you can use functions to avoid nesting, in certain cases, the specific functions you want to create are <em>recursive functions</em>.<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a> A great way to get rid of nested code related to for loops is to replace them with functionals. We do not want to dive into that further here, since Hadley Wickham’s book <a href="http://adv-r.had.co.nz/Functionals.html">Advanced R</a> covers the material quite nicely. However, let us just quickly discuss an example in the context of good style.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
 <span class="kw">lapply</span>(mtcars, class)
 <span class="co"># bad</span>
 for (i in <span class="kw">seq_len</span>(<span class="kw">ncol</span>(mtcars))){
   <span class="kw">print</span>(<span class="kw">class</span>(mtcars[, i]))
 }</code></pre></div>
-<p>Note that using a functional reduced the complexity of the code dramatically, which is certainly beneficial in terms of style. Next, let us consider a functional that uses an anonymous function.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> One has to take a second glance to realize that the anonymous function is wrapped into another function. Also, note the expression <code>character(1)</code> that is supplied an argument of <code>vapply</code> and does not belong to the anonymous function.</p>
+<p>Note that using a functional reduced the complexity of the code dramatically, which is certainly beneficial in terms of style. Next, let us consider a functional that uses an anonymous function.<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a> One has to take a second glance to realize that the anonymous function is wrapped into another function. Also, note the expression <code>character(1)</code> that is supplied an argument of <code>vapply</code> and does not belong to the anonymous function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">as.list</span>(<span class="dv">1</span>:<span class="dv">12</span>)
 <span class="kw">vapply</span>(x, function(r){
     if (r ==<span class="st"> </span><span class="dv">12</span>){
@@ -161,9 +167,9 @@ for (i in <span class="kw">seq_len</span>(<span class="kw">ncol</span>(mtcars)))
 </div>
 <div class="footnotes">
 <hr />
-<ol start="2">
-<li id="fn2"><p>See an example of how to compute a <a href="http://adv-r.had.co.nz/Function-operators.html">fibbonacci series</a><a href="nested-code.html#fnref2">↩</a></p></li>
-<li id="fn3"><p>See an introduction to anonymous functions in <a href="http://adv-r.had.co.nz/Functional-programming.html#anonymous-functions">Advanced R</a><a href="nested-code.html#fnref3">↩</a></p></li>
+<ol start="4">
+<li id="fn4"><p>See an example of how to compute a <a href="http://adv-r.had.co.nz/Function-operators.html">fibbonacci series</a><a href="nested-code.html#fnref4">↩</a></p></li>
+<li id="fn5"><p>See an introduction to anonymous functions in <a href="http://adv-r.had.co.nz/Functional-programming.html#anonymous-functions">Advanced R</a><a href="nested-code.html#fnref5">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -171,7 +177,7 @@ for (i in <span class="kw">seq_len</span>(<span class="kw">ncol</span>(mtcars)))
           </div>
         </div>
       </div>
-<a href="line-indentation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="commenting-code.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="conditional-statements.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

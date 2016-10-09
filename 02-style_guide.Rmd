@@ -147,7 +147,7 @@ like to highlight the following:
 F <- NULL
 list <- "not an actual list"
 mean <- "I mean he is not nice, he is quite the opposite"
-sum <- function(...) summarize(...)
+sum <- function(...) summary(...)
 ```
 * Think about how scoping rules might affect your code and name wisely. 
 
@@ -203,6 +203,7 @@ required, double quotes are probably also a safer option in certain cases.
 For these reasons, we advise the use of double quotes, so all strings are 
 wrapped in the same type of quotes.
 
+
 ## Line indentation
 Indenting code makes it more legible. For example, you can see where a 
 conditional statement starts and where it ends.
@@ -256,6 +257,135 @@ spaces, just make sure that RStudio inserts the same amount of spaces as other
 people you collaborate with use. Otherwise, it will mess up the indentation. 
 Regarding the more flexible indentation mentioned above, RStudio takes care of 
 that too.
+
+## Spacing
+```{r, eval = FALSE}
+#good
+if (a == 3 | b > 4){ 
+#...
+max(c(1, 2, 3, NA), na.rm = TRUE)
+a[[1]][3]
+# bad
+if (a==3|b>4){
+# ...
+max ( c(1,2,3,NA) ,na.rm=TRUE )
+a[[1 ] ] [ 3]
+```
+* All binary operators such as +, /, & etc should be surrounded by a space.
+* A comma is always followed by a space.
+* A left parenthesis should be placed before each function call except `if`.
+
+
+## Line length
+Lines should not exceed 80 characters. There are several reasons for this:^[
+Some of the reasons outlined here are taken from
+[this](http://programmers.stackexchange.com/questions/604/is-the-80-character-
+limit-still-relevant-in-times-of-widescreen-monitors) stackoverflow
+question.]
+
+* On a typical screen, the code typically gets displayed only in one tab or 
+  window, so space is limited. Since you will always have lines with very 
+  little code, it is a waste of screen space to have large differences in the 
+  line width.
+* Line-by-line diffs in a version control system are more legible if lines are 
+  not too long.
+* It is rare, but if code needs to be printed, endless lines are a nightmare.
+
+
+## Commenting code
+Commenting code in a broad sense is structuring code. In a narrow sense, it 
+is about explaining *why* something is done the was it is done, rarely the 
+*how* also needs to be explained. 
+\
+Comments always start with `#` in R. For three levels of granularity, 
+we can use `###`, `##` and `#`.
+
+### Structuring code
+To structure code, it can be grouped into segments, sections and subsections. 
+We recommend starting with sections only, so as your code base grows, you can 
+extend in both directions of granularity. However, since you don't want to 
+take it too far with commenting, three levels will hardly be necessary. Also 
+note that segments use roman numbers, sections arabic numbers and subsections 
+letters.  The idea is that segments are represented by the thickest *lines* 
+(since they represent the top level) and subsections are represented by 
+*loose lines*. 
+```{r}
+# good
+### ============================================================================
+### Segment I
+### Description of what the first segment does
+## _____________________________________________________________________________
+## Section 1
+## Description of what the first section does 
+# .............................................................................
+# Subsection a 
+# Description of what the first section does 
+
+# [your code goes here]
+
+# .............................................................................
+# Subsection b 
+# Description of what the first section does 
+
+# [your code goes here]
+
+
+### ============================================================================
+```
+
+We discourage the use of plain `#` for a line of comment with the title of the 
+section centered.
+```{r}
+# bad
+############################ A TITLE GOES HERE #################################
+```
+The reasons are the following:
+
+* `#` is rather dominant and has an irregular pattern, which is likely to cause
+  distraction to the eye.
+* Putting the title in the same line as the separator has two main
+  disadvantages: For every separator, the width of the `#`s has to be adjusted 
+  plus it is tedious to get the title exactly centered. Also, no code is 
+  centered, so why should these markers be?
+* Just plain `#` allows only one level of granularity.
+
+
+### Explaining code
+```{r, echo = FALSE}
+x <- 1:10
+```
+```{r}
+# good
+sum(x) # used to do xyz below
+# bad
+mean(x) # take the mean
+```
+If not extremely complex, the user wants to know *why* someone does something, 
+*how* (because he can read the code). Often, it makes sense organizing comments
+in block instead of commenting every line.
+If you are writing a function and its inputs and outputs need to be explained
+in more depth, create a package for it and use the `roxygen2` package^[For more 
+information on the package, check out the [vignette](https://cran.r-project.org/
+web/packages/roxygen2/vignettes/roxygen2.html)]
+help files from a comment block at the top of your function. Comments should be 
+put next to the function calls on the same line. If they do not fit there fully, 
+move them to the line above the code
+
+```{r, eval = FALSE}
+# good
+a_function_you_want_to_call(x = rep(1:10, 3), y = rnorm(10)) # a quick comment
+
+# longer comments that do not fit on the same line with the code are put above
+a_function_you_want_to_call(x = rep(1:10, 3), y = rnorm(10))
+
+# bad
+a_function_you_want_to_call(x = rep(1:10, 3), y = rnorm(10)) # longer comments 
+# that do not fit on the same line with the code are not put like this
+```
+In line with the previous subsection, we recommend having a set of three levels
+of granularity available for explaining code. Start with `##` so you have an 
+option for both lower level and higher level comments left. 
+
 
 ## Nested code
 Line indentation is great, but if you hit the third level of nesting, you 
@@ -351,7 +481,7 @@ for (i in seq_along(x)){
 }
 ```
 Note that double negation is not desirable in conditional statements, although
-it technically works fine. Also, it seems quite natrual to put a *true* condition
+it technically works fine. Also, it seems quite natural to put a *true* condition
 first, or the condition that is expected to apply mostly.
 ```{r}
 # good
