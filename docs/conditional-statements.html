@@ -168,7 +168,7 @@ for (i in <span class="kw">seq_along</span>(x)){
     <span class="kw">print</span>(<span class="kw">sqrt</span>(x[i]))
   }
 }</code></pre></div>
-<p>Note that double negation is not desirable in conditional statements, although it technically works fine. Also, it seems quite natrual to put a <em>true</em> condition first, or the condition that is expected to apply mostly.</p>
+<p>Note that double negation is not desirable in conditional statements, although it technically works fine. Also, it seems quite natural to put a <em>true</em> condition first, or the condition that is expected to apply mostly.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
 if (fail ==<span class="st"> </span><span class="ot">TRUE</span>){
   <span class="kw">message</span>(<span class="st">&quot;the test failed&quot;</span>)
@@ -183,9 +183,8 @@ if (fail !=<span class="st"> </span><span class="ot">FALSE</span>){
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good </span>
 if (success ==<span class="st"> </span><span class="ot">TRUE</span>){
   <span class="kw">message</span>(<span class="st">&quot;the test succeeded&quot;</span>)
-}</code></pre></div>
-<pre><code>## the test succeeded</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># bad</span>
+}
+<span class="co"># bad</span>
 if(fail !=<span class="st"> </span><span class="ot">FALSE</span>){
   <span class="kw">message</span>(<span class="st">&quot;the test did not succeede&quot;</span>)
 }</code></pre></div>
