@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bono Usu</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Bono Usu">
+  <meta name="generator" content="bookdown 0.1 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Bono Usu" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Bono Usu" />
+  
+  
+  
+
+<meta name="author" content="Jon Calder &amp; Lorenz Walthert">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="code-style-guide.html">
+<link rel="next" href="assignment.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="code-style-guide.html"><a href="code-style-guide.html"><i class="fa fa-check"></i><b>2</b> Code style guide</a><ul>
+<li class="chapter" data-level="2.1" data-path="naming.html"><a href="naming.html"><i class="fa fa-check"></i><b>2.1</b> Naming</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="naming.html"><a href="naming.html#naming-files"><i class="fa fa-check"></i><b>2.1.1</b> Naming files</a></li>
+<li class="chapter" data-level="2.1.2" data-path="naming.html"><a href="naming.html#naming-objects"><i class="fa fa-check"></i><b>2.1.2</b> Naming objects</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="assignment.html"><a href="assignment.html"><i class="fa fa-check"></i><b>2.2</b> Assignment</a></li>
+<li class="chapter" data-level="2.3" data-path="quotes.html"><a href="quotes.html"><i class="fa fa-check"></i><b>2.3</b> Quotes</a></li>
+<li class="chapter" data-level="2.4" data-path="line-indentation.html"><a href="line-indentation.html"><i class="fa fa-check"></i><b>2.4</b> Line indentation</a></li>
+<li class="chapter" data-level="2.5" data-path="nested-code.html"><a href="nested-code.html"><i class="fa fa-check"></i><b>2.5</b> Nested code</a></li>
+<li class="chapter" data-level="2.6" data-path="conditional-statements.html"><a href="conditional-statements.html"><i class="fa fa-check"></i><b>2.6</b> Conditional statements</a></li>
+<li class="chapter" data-level="2.7" data-path="argument-specification.html"><a href="argument-specification.html"><i class="fa fa-check"></i><b>2.7</b> Argument specification</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="workflow-collaboration.html"><a href="workflow-collaboration.html"><i class="fa fa-check"></i><b>3</b> Workflow &amp; collaboration</a></li>
+<li class="chapter" data-level="4" data-path="package-development.html"><a href="package-development.html"><i class="fa fa-check"></i><b>4</b> Package development</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bono Usu</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="naming" class="section level2">
+<h2><span class="header-section-number">2.1</span> Naming</h2>
+<div id="naming-files" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Naming files</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
+reduce_matrix.R
+<span class="co"># bad</span>
+rM_1.r</code></pre></div>
+<p>At the point of creating files, it is important to choose a good name. The same applies for the directory where it is stored. Changing the name or location of a file later can cause a number of problems:</p>
+<ul>
+<li>outdated dependencies due to invalid paths.</li>
+<li>removed history in the version control system (e.g. not with <code>git mv</code>)if renaming is not done properly. <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></li>
+<li>discontinuity in the history. It is hard to find renamed files.</li>
+<li>processes that take the file name as an input and return an output that is related to this name are problematic. For example, when creating an html file from an Rmd file via <code>knitr()</code>, the created object has the same name (but a different suffix) as the Rmd file. If you change the name, the old html file will still be there but a new html file with the new name will also be there. Most likely, you need to clean up manually.</li>
+</ul>
+<p>Hence, you should avoid renaming files if possible. When naming files, the following considerations are worth taking into account:</p>
+<ul>
+<li>Sometimes, there are restrictions in place for file names (e.g. the package <code>testthat</code> used in package development requires that all files pertaining to testing start with “test” and live in a particular folder).</li>
+<li>Do use expressive but concise names. Describe the function of the file (<code>clean_temperature_data.R</code>), what it inputs or outputs (<code>daily_to_monthly_transformation.R</code>), how it relates to other files (e.g. <code>helper_sort.R</code> is a helper function for a sort routine) and so on.</li>
+<li>Do not use version numbers in the file name. Use a version control system like git instead.</li>
+<li>Use all lower case names. One motivation for this is that it can save keystrokes and improving typing efficiency. Possibly more important though is that when recalling functions (given that R is case-sensitive), either yourself or other R developers and users will have a harder time remembering what case you used for a function name. Instead of using camelCase, separate elements of the name with an underscore.</li>
+<li>It can be advantageous to use a combination of numbers and descriptive words as a file name. This allows you to a) select files efficiently with bash or even keyboard navigation in a user interface and b) can be informative if you want to maintain a certain order of the files (e.g. if scripts have to be run in a certain) order. However, note that if you use this system, you need to change the name of files if you want to insert an element at a position other than the end of the sequence.</li>
+<li>Since some systems are not case-sensitive, do not use file names that only differ in the case of the characters (e.g. <code>readme.md</code> and <code>README.md</code>).</li>
+<li>Choose unique file names, even across directories. This avoids confusion and allows you to find the file you are looking for very quickly with a search function or <em>go to</em> command such as the one in RStudio.</li>
+<li>Use only alpha-numeric characters where possible and avoid using special characters. While Linux only forbids the use of / in file names, Microsoft forbids &lt;,&gt;,:,“,/,,|,? and * in file names. So while it may be possible to use a range of special characters on some platforms, it is ill advised to do so and will likely cause compatibility issues and headaches for others. The only special characters you should really need to make use of are _ and -.</li>
+<li>Files with extremely long names might be very expressive, but that comes at a cost: they are not memorable, often truncated for displaying and hence not really helpful anymore.</li>
+<li>Short and concise names are preferable but do refrain from using abbreviations since that makes it hard for people to understand them if they lack prior or implicit knowledge about your code. If it is absolutely inevitable, provide a dictionary and a reference to it in the readme file.</li>
+<li>stick to a format if the content you are naming has one i.e. if your files refer to specific dates or times, always use the same representation, e.g YYMMDD. Other examples are names (firstname_lastname).</li>
+<li>Do not use synonyms, mix British or American English etc.</li>
+<li>Always use the same case for file extensions. Although <code>xzy.r</code> and <code>xyz.R</code> are both recognized as R files, we recommend the latter.</li>
+</ul>
+<p>To sum it up, here are a couple of bad examples for the cases described above.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># version number in file name</span>
+cleaning_3.R
+<span class="co"># special character</span>
+is_it_correct<span class="st">&#39;.Rmd</span>
+
+<span class="st"># length</span>
+<span class="st">this_name_is_expressive_but_will_always_be_truncated_and_hence_useless.pdf</span>
+<span class="st"># (uncommon) abbreviations</span>
+<span class="st">vp8rm_fs.R</span></code></pre></div>
+<p>Do not use these pairs of examples simultaneously.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># avoid synonyms</span>
+quick_data_check.R 
+fast_data_check.R
+<span class="co"># stick to one format</span>
+<span class="dv">2016-02</span>-15_tidy.RDS
+15_Feb2016.csv</code></pre></div>
+<p>On the other hand, these file names meet the criteria outlined before.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># lower case names</span>
+showcase_outlier.Rmd
+<span class="co"># underscore as a separator</span>
+combine_a_and_b.R
+<span class="co"># files in order</span>
+<span class="dv">01</span>-get_data.R
+<span class="dv">02</span>-clean_data.R
+<span class="dv">03</span>-visualize_data.R
+<span class="co"># uppercase extension for R</span>
+for_mint.R</code></pre></div>
+</div>
+<div id="naming-objects" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Naming objects</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
+reduce_matrix <span class="co"># for a function</span>
+reduced_matrix <span class="co"># for a variable</span>
+<span class="co"># bad</span>
+convert.characters <span class="co"># resembles S3 method</span></code></pre></div>
+<p>A lot of rules that were described in the above section apply for naming objects (in the sense of bindings within namespaces) as well. In particular we would like to highlight the following:</p>
+<ul>
+<li>use verbs for functions and nouns for variables. This helps you distinguish objects into categories.</li>
+<li>do not use the dot within object names. It gives them the appearance of methods</li>
+<li>Avoid function names and variable names that already exist or have a particular meaning. For example, <code>data()</code> is a function in base R, so it might be easier to call your data <code>x</code>, <code>dta</code>, <code>raw</code> etc. Here are a couple of other examples of bad R object names.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># bad</span>
+F &lt;-<span class="st"> </span><span class="ot">NULL</span>
+list &lt;-<span class="st"> &quot;not an actual list&quot;</span>
+mean &lt;-<span class="st"> &quot;I mean he is not nice, he is quite the opposite&quot;</span>
+sum &lt;-<span class="st"> </span>function(...) <span class="kw">summarize</span>(...)</code></pre></div>
+<ul>
+<li>Think about how scoping rules might affect your code and name wisely.</li>
+</ul>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>See <a href="http://rogerdudler.github.io/git-guide/">this</a> website for a quick introduction to git, a popular version control system.<a href="naming.html#fnref1">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="code-style-guide.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="assignment.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

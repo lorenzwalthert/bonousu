@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="workflow-collaboration.html">
-
+<link rel="prev" href="line-indentation.html">
+<link rel="next" href="conditional-statements.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -132,25 +132,47 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="package-development" class="section level1">
-<h1><span class="header-section-number">4</span> Package development</h1>
-
+<div id="nested-code" class="section level2">
+<h2><span class="header-section-number">2.5</span> Nested code</h2>
+<p>Line indentation is great, but if you hit the third level of nesting, you should maybe consider an approach that does not require so many sub-levels of code.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># bad</span>
+if (x ==<span class="st"> </span>T){
+  for (i in <span class="dv">4</span>:<span class="dv">13</span>){
+    if (z[i] ==<span class="st"> </span>T){
+      <span class="co"># ...</span>
+    } else if (t ==<span class="st"> </span>T){
+<span class="co"># .... </span></code></pre></div>
+<p>In many cases, you can use functions to avoid nesting, in certain cases, the specific functions you want to create are <em>recursive functions</em>.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> A great way to get rid of nested code related to for loops is to replace them with functionals. We do not want to dive into that further here, since Hadley Wickham’s book <a href="http://adv-r.had.co.nz/Functionals.html">Advanced R</a> covers the material quite nicely. However, let us just quickly discuss an example in the context of good style.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
+<span class="kw">lapply</span>(mtcars, class)
+<span class="co"># bad</span>
+for (i in <span class="kw">seq_len</span>(<span class="kw">ncol</span>(mtcars))){
+  <span class="kw">print</span>(<span class="kw">class</span>(mtcars[, i]))
+}</code></pre></div>
+<p>Note that using a functional reduced the complexity of the code dramatically, which is certainly beneficial in terms of style. Next, let us consider a functional that uses an anonymous function.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> One has to take a second glance to realize that the anonymous function is wrapped into another function. Also, note the expression <code>character(1)</code> that is supplied an argument of <code>vapply</code> and does not belong to the anonymous function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">as.list</span>(<span class="dv">1</span>:<span class="dv">12</span>)
+<span class="kw">vapply</span>(x, function(r){
+    if (r ==<span class="st"> </span><span class="dv">12</span>){
+      <span class="kw">print</span>(<span class="st">&quot;this is 12&quot;</span>)
+    } else {
+      <span class="kw">print</span>(<span class="st">&quot;not 12&quot;</span>)
+    }
+  }, <span class="kw">character</span>(<span class="dv">1</span>)) </code></pre></div>
 </div>
-
-
-
-
-
-
-
-
+<div class="footnotes">
+<hr />
+<ol start="2">
+<li id="fn2"><p>See an example of how to compute a <a href="http://adv-r.had.co.nz/Function-operators.html">fibbonacci series</a><a href="nested-code.html#fnref2">↩</a></p></li>
+<li id="fn3"><p>See an introduction to anonymous functions in <a href="http://adv-r.had.co.nz/Functional-programming.html#anonymous-functions">Advanced R</a><a href="nested-code.html#fnref3">↩</a></p></li>
+</ol>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="workflow-collaboration.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="line-indentation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conditional-statements.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>

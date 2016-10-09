@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="workflow-collaboration.html">
-
+<link rel="prev" href="assignment.html">
+<link rel="next" href="line-indentation.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -132,25 +132,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="package-development" class="section level1">
-<h1><span class="header-section-number">4</span> Package development</h1>
-
+<div id="quotes" class="section level2">
+<h2><span class="header-section-number">2.3</span> Quotes</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># advised</span>
+<span class="st">&quot;double quotes&quot;</span>
+<span class="co"># discouraged</span>
+<span class="st">&#39;single quotes&#39;</span></code></pre></div>
+<p>In R, both double quotes and single quotes are available. The advantage of single quotes is that they result in a slightly cleaner visual representation of the code.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">&#39;this is nice&#39;</span>); <span class="kw">print</span>(<span class="st">&quot;this is a bit less clean&quot;</span>)</code></pre></div>
+<p>On the other hand, double quotes can be used to enclose single quotes, whereas the reverse is not possible. This can be useful to create a string like the following.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">varname &lt;-<span class="st"> &quot;index&quot;</span>
+found &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;n&#39;t &quot;</span>, <span class="st">&quot;&quot;</span>), <span class="dt">size =</span> <span class="dv">1</span>)
+<span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;the variable &#39;&quot;</span>, varname, <span class="st">&quot;&#39; was&quot;</span>, found, <span class="st">&quot; found&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>))</code></pre></div>
+<p>Note that in this example, single quotes behave just like any other character. Hence, is not necessary to <em>close</em> an open single quote. This allows us to also use them as contraction in <code>varname</code> without escape. Depending on whether or not compatibility with other programming languages is required, double quotes are probably also a safer option in certain cases.<br />
+<br />
+For these reasons, we advise the use of double quotes, so all strings are wrapped in the same type of quotes.</p>
 </div>
-
-
-
-
-
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="workflow-collaboration.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="assignment.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="line-indentation.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>

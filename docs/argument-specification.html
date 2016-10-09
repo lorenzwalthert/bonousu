@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="workflow-collaboration.html">
-
+<link rel="prev" href="conditional-statements.html">
+<link rel="next" href="workflow-collaboration.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -132,25 +132,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="package-development" class="section level1">
-<h1><span class="header-section-number">4</span> Package development</h1>
+<div id="argument-specification" class="section level2">
+<h2><span class="header-section-number">2.7</span> Argument specification</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
+<span class="kw">sample</span>(<span class="dv">100</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)
+<span class="co"># bad </span>
+<span class="kw">sample</span>(<span class="dv">100</span>, , <span class="ot">FALSE</span>)</code></pre></div>
+<p>Whether and how many arguments you want to name depends on the context. Naming each argument makes the code more accessible for inexperienced R users but makes it also less concise. Also, by definition, you do not need to specify an argument value if you want to adhere to the default. However, sometimes it can increase the legibility to do so, in particular when you want to highlight that you are using a function twice and specify the argument differently.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case_irrelevant &lt;-<span class="st"> </span><span class="kw">grep</span>(<span class="st">&quot;Look&quot;</span>, <span class="st">&quot;the value to look&quot;</span>, <span class="dt">ignore.case =</span> <span class="ot">TRUE</span>)
+case_relevant   &lt;-<span class="st"> </span><span class="kw">grep</span>(<span class="st">&quot;look&quot;</span>, <span class="st">&quot;the value to look&quot;</span>, <span class="dt">ignore.case =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p>Regarding the order of the arguments, it is a good convention to stick to the default, even if you name the arguments. How long does it take you to spot the all differences in the following two commands?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># bad</span>
+<span class="kw">cut</span>(<span class="dv">3</span>:<span class="dv">19</span>, <span class="dt">breaks =</span> <span class="dv">2</span>, <span class="dt">right =</span> <span class="ot">TRUE</span>, <span class="dt">include.lowest =</span> <span class="ot">FALSE</span>)
+<span class="kw">cut</span>(<span class="dt">include.lowest =</span> <span class="ot">TRUE</span>, <span class="dt">breaks =</span> <span class="dv">3</span>:<span class="dv">5</span>, <span class="dt">right =</span> <span class="ot">FALSE</span>, <span class="dt">x =</span> <span class="dv">3</span>:<span class="dv">19</span>)</code></pre></div>
 
 </div>
-
-
-
-
-
-
-
-
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="workflow-collaboration.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="conditional-statements.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="workflow-collaboration.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>

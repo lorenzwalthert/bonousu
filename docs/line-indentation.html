@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="workflow-collaboration.html">
-
+<link rel="prev" href="quotes.html">
+<link rel="next" href="nested-code.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -132,25 +132,42 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="package-development" class="section level1">
-<h1><span class="header-section-number">4</span> Package development</h1>
-
+<div id="line-indentation" class="section level2">
+<h2><span class="header-section-number">2.4</span> Line indentation</h2>
+<p>Indenting code makes it more legible. For example, you can see where a conditional statement starts and where it ends.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good </span>
+if (condition ==<span class="st"> </span><span class="ot">TRUE</span>){
+  <span class="co"># quite a bit of code</span>
+  <span class="co"># ...</span>
+  if (another_condition ==<span class="st"> </span><span class="ot">FALSE</span>){
+    <span class="co"># we are going even deeper...</span>
+  }
+} else {
+  <span class="co"># another block of code</span>
+}</code></pre></div>
+<p>Proper spacing is related to indentation and helps if a lot of consecutive lines are similar but not exactly the same. Below, the difference of the two lines can be spotted pretty much immediately.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
+big_range   &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>,   <span class="dt">size =</span> <span class="dv">1</span>,   <span class="dt">replace =</span> <span class="ot">FALSE</span>)
+small_range &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">100</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>That is because some extra space was added in certain places. Without this extra spaces, the code would look less compact.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># bad</span>
+big_range &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)
+small_range &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">100</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>Another place to make use of indentation is when vectors are created</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
+height &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">Daniel =</span> <span class="fl">1.98</span>,
+               <span class="dt">Melody =</span> <span class="fl">1.69</span>,
+               <span class="dt">Peter  =</span> <span class="fl">1.87</span>)</code></pre></div>
+<p>There are two ways to indent: either using tabs or using spaces. We suggest two spaces for indentation, but in certain cases as the last example, it might be wise to use a more flexible indentation rule, i.e. to allow all elements of the list to appear exactly in line.<br />
+For RStudio users: By default, RStudio inserts spaces when you type tabs, so you can have the best of both worlds. If you prefer to press tab instead of spaces, just make sure that RStudio inserts the same amount of spaces as other people you collaborate with use. Otherwise, it will mess up the indentation. Regarding the more flexible indentation mentioned above, RStudio takes care of that too.</p>
 </div>
-
-
-
-
-
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="workflow-collaboration.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="quotes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="nested-code.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>

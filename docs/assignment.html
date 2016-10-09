@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="workflow-collaboration.html">
-
+<link rel="prev" href="naming.html">
+<link rel="next" href="quotes.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -132,25 +132,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="package-development" class="section level1">
-<h1><span class="header-section-number">4</span> Package development</h1>
-
+<div id="assignment" class="section level2">
+<h2><span class="header-section-number">2.2</span> Assignment</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
+a &lt;-<span class="st"> </span><span class="dv">2</span>
+<span class="co"># bad </span>
+a =<span class="st"> </span><span class="dv">2</span></code></pre></div>
+<p>Although programmers coming from other languages may not immediately see the benefit of using the so called <em>assignment operator</em> instead of the equals sign, the main advantage is that that an <em>asignment context</em> can be distinguished with ease from other contexts, for example from a function call, from a list creation and from a comparison of two objects.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">f</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="ot">TRUE</span>)
+<span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span>:<span class="dv">3</span>, 
+     <span class="dt">b =</span> <span class="kw">sample</span>(letters[<span class="dv">1</span>:<span class="dv">4</span>]))
+a ==<span class="st"> </span>b</code></pre></div>
 </div>
-
-
-
-
-
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="workflow-collaboration.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="naming.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="quotes.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
