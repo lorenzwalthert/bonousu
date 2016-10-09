@@ -258,11 +258,11 @@ should maybe consider an approach that does not require so many sub-levels of
 code. 
 ```{r}
 # bad
-if (x == T){
+if (x == TRUE){
   for (i in 4:13){
-    if (z[i] == T){
+    if (z[i] == TRUE){
       # ...
-    } else if (t == T){
+    } else if (t == TRUE){
 # .... 
 ```
 In many cases, you can use functions to avoid nesting, in certain cases, the 
