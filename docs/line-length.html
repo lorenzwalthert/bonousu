@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bono Usu</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Bono Usu">
+  <meta name="generator" content="bookdown 0.1 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Bono Usu" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Bono Usu" />
+  
+  
+  
+
+<meta name="author" content="Jon Calder &amp; Lorenz Walthert">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="spacing.html">
+<link rel="next" href="commenting-code.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="code-style-guide.html"><a href="code-style-guide.html"><i class="fa fa-check"></i><b>2</b> Code style guide</a><ul>
+<li class="chapter" data-level="2.1" data-path="naming.html"><a href="naming.html"><i class="fa fa-check"></i><b>2.1</b> Naming</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="naming.html"><a href="naming.html#naming-files"><i class="fa fa-check"></i><b>2.1.1</b> Naming files</a></li>
+<li class="chapter" data-level="2.1.2" data-path="naming.html"><a href="naming.html#naming-objects"><i class="fa fa-check"></i><b>2.1.2</b> Naming objects</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="assignment.html"><a href="assignment.html"><i class="fa fa-check"></i><b>2.2</b> Assignment</a></li>
+<li class="chapter" data-level="2.3" data-path="quotes.html"><a href="quotes.html"><i class="fa fa-check"></i><b>2.3</b> Quotes</a></li>
+<li class="chapter" data-level="2.4" data-path="line-indentation.html"><a href="line-indentation.html"><i class="fa fa-check"></i><b>2.4</b> Line indentation</a></li>
+<li class="chapter" data-level="2.5" data-path="spacing.html"><a href="spacing.html"><i class="fa fa-check"></i><b>2.5</b> Spacing</a></li>
+<li class="chapter" data-level="2.6" data-path="line-length.html"><a href="line-length.html"><i class="fa fa-check"></i><b>2.6</b> Line length</a></li>
+<li class="chapter" data-level="2.7" data-path="commenting-code.html"><a href="commenting-code.html"><i class="fa fa-check"></i><b>2.7</b> Commenting code</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="commenting-code.html"><a href="commenting-code.html#structuring-code"><i class="fa fa-check"></i><b>2.7.1</b> Structuring code</a></li>
+<li class="chapter" data-level="2.7.2" data-path="commenting-code.html"><a href="commenting-code.html#explaining-code"><i class="fa fa-check"></i><b>2.7.2</b> Explaining code</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="nested-code.html"><a href="nested-code.html"><i class="fa fa-check"></i><b>2.8</b> Nested code</a></li>
+<li class="chapter" data-level="2.9" data-path="conditional-statements.html"><a href="conditional-statements.html"><i class="fa fa-check"></i><b>2.9</b> Conditional statements</a></li>
+<li class="chapter" data-level="2.10" data-path="argument-specification.html"><a href="argument-specification.html"><i class="fa fa-check"></i><b>2.10</b> Argument specification</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="workflow-collaboration.html"><a href="workflow-collaboration.html"><i class="fa fa-check"></i><b>3</b> Workflow &amp; collaboration</a></li>
+<li class="chapter" data-level="4" data-path="package-development.html"><a href="package-development.html"><i class="fa fa-check"></i><b>4</b> Package development</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bono Usu</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="line-length" class="section level2">
+<h2><span class="header-section-number">2.6</span> Line length</h2>
+<p>Lines should not exceed 80 characters. There are several reasons for this:<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></p>
+<ul>
+<li>On a typical screen, the code typically gets displayed only in one tab or window, so space is limited. Since you will always have lines with very little code, it is a waste of screen space to have large differences in the line width.</li>
+<li>Line-by-line diffs in a version control system are more legible if lines are not too long.</li>
+<li>It is rare, but if code needs to be printed, endless lines are a nightmare.</li>
+</ul>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="2">
+<li id="fn2"><p>Some of the reasons outlined here are taken from <a href="http://programmers.stackexchange.com/questions/604/is-the-80-character-%20limit-still-relevant-in-times-of-widescreen-monitors">this</a> stackoverflow question.<a href="line-length.html#fnref2">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="spacing.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="commenting-code.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
