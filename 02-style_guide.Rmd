@@ -66,8 +66,12 @@ following considerations are worth taking into account:
 * Choose unique file names, even across directories. This avoids confusion and
   allows you to find the file you are looking for very quickly with a search 
   function or *go to* command such as the one in RStudio.
-* Try to avoid using special characters (like ?, \\ etc.) since they are not 
-  allowed, can cause compatibility issues, need to be escaped and so forth.
+* Use only alpha-numeric characters where possible and avoid using special 
+  characters. While Linux only forbids the use of / in file names, Microsoft 
+  forbids <,>,:,",/,\,|,? and * in file names. So while it may be possible to 
+  use a range of special characters on some platforms, it is ill advised to do 
+  so and will likely cause compatibility issues and headaches for others. The 
+  only special characters you should really need to make use of are _ and -.
 * Files with extremely long names might be very expressive, but that comes at 
   a cost: they are not memorable, often truncated for displaying and hence not
   really helpful anymore.
@@ -199,22 +203,22 @@ required, double quotes are probably also a safer option in certain cases.
 For these reasons, we advise the use of double quotes, so all strings are 
 wrapped in the same type of quotes.
 
-## Line indention
+## Line indentation
 Indenting code makes it more legible. For example, you can see where a 
 conditional statement starts and where it ends.
 ```{r}
 # good 
-if(condition == TRUE){
+if (condition == TRUE){
   # quite a bit of code
   # ...
-  if(another_condition == FALSE){
+  if (another_condition == FALSE){
     # we are going even deeper...
   }
 } else {
   # another block of code
 }
 ```
-Proper spacing is related to indention and helps if a lot of consecutive lines are similar
+Proper spacing is related to indentation and helps if a lot of consecutive lines are similar
 but not exactly the same. Below, the difference of the two lines can be spotted
 pretty much immediately.
 ```{r}
@@ -229,7 +233,7 @@ spaces, the code would look less compact.
 big_range <- sample(1, size = 1, replace = FALSE)
 small_range <- sample(100, size = 100, replace = TRUE)
 ```
-Another place to make use of indention is when vectors are created
+Another place to make use of indentation is when vectors are created
 ```{r}
 # good
 height <- list(Daniel = 1.98,
@@ -237,28 +241,28 @@ height <- list(Daniel = 1.98,
                Peter  = 1.87)
 ```
 There are two ways to indent: either using tabs or using spaces. We suggest two 
-spaces for indention, but in certain cases as the last example, it might be 
-wise to use a more flexible indention rule, i.e. to allow all elements of the 
+spaces for indentation, but in certain cases as the last example, it might be 
+wise to use a more flexible indentation rule, i.e. to allow all elements of the 
 list to appear exactly in line.
 \
 For RStudio users: By default, RStudio inserts spaces when you type tabs, so 
 you can have the best of both worlds. If you prefer to press tab instead of 
 spaces, just make sure that RStudio inserts the same amount of spaces as other 
-people you collaborate with use. Otherwise, it will mess up the indention. 
-Regarding the more flexible indention mentioned above, RStudio takes care of 
+people you collaborate with use. Otherwise, it will mess up the indentation. 
+Regarding the more flexible indentation mentioned above, RStudio takes care of 
 that too.
 
 ## Nested code
-Line indention are great, but if you hit the third level of nesting, you 
+Line indentation is great, but if you hit the third level of nesting, you 
 should maybe consider an approach that does not require so many sub-levels of
 code. 
 ```{r}
 # bad
-if(x == T){
-  for(i in 4:13){
-    if(z[i] == T){
+if (x == T){
+  for (i in 4:13){
+    if (z[i] == T){
       # ...
-    } else if(t == T){
+    } else if (t == T){
 # .... 
 ```
 In many cases, you can use functions to avoid nesting, in certain cases, the 
@@ -273,7 +277,7 @@ context of good style.
 # good
 lapply(mtcars, class)
 # bad
-for(i in seq_len(ncol(mtcars))){
+for (i in seq_len(ncol(mtcars))){
   print(class(mtcars[, i]))
 }
 ```
@@ -288,7 +292,7 @@ function.
 ```{r}
 x <- as.list(1:12)
 vapply(x, function(r){
-    if(r == 12){
+    if (r == 12){
       print("this is 12")
     } else {
       print("not 12")
@@ -304,22 +308,22 @@ That is four times less than using the verbose form. In the light of these,
 relationships, it might be ok to use the *one-liner* for very short statements.
 ```{r}
 # concise
-if(fail == FALSE) message("hi") else message("bye")
+if (fail == FALSE) message("hi") else message("bye")
 # verbose
-if(fail == TRUE) {
+if (fail == TRUE) {
   message("hi") 
 } else {
   message("bye")
 }
 ```
-Especially for very short conditional statements, you might wan to resort to 
+Especially for very short conditional statements, you might want to resort to 
 the function `ifelse`.
 ```{r}
 ifelse(fail == FALSE, 
        yes = "the test did fail", 
        no  = "the test did not fail")
 ```
-`ifelse` can also take a vectorized input, which makes it even more usefull to 
+`ifelse` can also take a vectorized input, which makes it even more useful to 
 eliminate loops.
 ```{r}
 x <- -3:4
@@ -327,8 +331,8 @@ x <- -3:4
 sqrt(ifelse(x < 0, NA, x))
 
 # bad 
-for(i in seq_along(x)){
-  if(x[i] < 0){
+for (i in seq_along(x)){
+  if (x[i] < 0){
     print(NA)
   } else {
     print(sqrt(x[i]))
@@ -342,7 +346,7 @@ paste("the test did", if(fail == FALSE) "not", "fail")
 ```
 A very verbose alternative would be:
 ```{r}
-if(fail == FALSE){
+if (fail == FALSE){
   "the test did not fail"
 } else {
   "the test did fail"
@@ -350,7 +354,7 @@ if(fail == FALSE){
 ```
 If the duplication should be avoided, one needs to create a variable.
 ```{r}
-if(fail == FALSE){
+if (fail == FALSE){
   msg <- "not"
 }
 paste("the test did", msg, "fail")
@@ -359,7 +363,7 @@ rm(msg)
 When an assignment to a variable is conditional, the following is possible. 
 ```{r}
 x <- 
-  if(fail == TRUE) {
+  if (fail == TRUE) {
     rpois(10)
   } else {
     rnorm(10)
@@ -368,11 +372,11 @@ x <-
 Boolean conditional statements can be abbreviated. The following two
 *if statements* are identical. 
 ```{r}
-if(!cond){
+if (!cond){
   # do xyz
 }
 
-if(cond == FALSE){
+if (cond == FALSE){
   # do xyz
 }
 ```
@@ -381,9 +385,9 @@ statements.
 ```{r}
 boolean <- sample(c(TRUE, FALSE), 10, replace= TRUE)
 # good
-if(all(boolean)){
+if (all(boolean)){
   "all values are TRUE. That can't be true."
-} else if(any(boolean)){
+} else if (any(boolean)){
   "at least some values are TRUE. This is quite likely."
 } else {
   "not a single TRUE value?"
@@ -396,16 +400,16 @@ above example are `TRUE`, then also some are. So exchanging the *if* and the
 because the first condition already applies. To fix that you could be tempted 
 to do the following:
 ```{r}
-if(any(boolean) & !all(boolean)){
+if (any(boolean) & !all(boolean)){
   "at least some values are TRUE. This is quite likely."
-} else if(all(boolean)){
+} else if (all(boolean)){
   "all values are TRUE. That can't be true."
 } else {
   "not a single TRUE value?"
 }
 ```
-Obviously, you better do not exchange the conditional statements because this
-would create redundancy.
+Clearly changing the ordering of the conditional statements like this creates 
+redundancy and should thus be avoided.
 
 Also, lazy evaluation can be useful in combination with conditional statements.
 For example, you might want to so something within a function based on an input 
@@ -413,21 +417,21 @@ value. However, you do not know whether the value was supplied in the first
 place. Here are two ways to deal with that situation.
 ```{r}
 # good 
-if(!missing(x) && x > 10) {
+if (!missing(x) && x > 10) {
   # your code
 }
 # bad
-if(!missing(x)){
+if (!missing(x)){
   if(x > 10 ){
    # your code 
   }
 }
 ```
 
-Finally, an alternative to *if statements* is the function `switch()` if the condition is 
-of class character, especially if there are many conditions to test. Note that
-switch expects a match and returns an invisible `NULL` if the condition does 
-not match with any option given.
+Finally, an alternative to *if statements* is the function `switch()` if the 
+condition is of class character, especially if there are many conditions to 
+test. Note that switch expects a match and returns an invisible `NULL` if the 
+condition does not match with any option given.
 ```{r, eval = TRUE}
 outcome <- "excelled"
 switch(outcome, 
