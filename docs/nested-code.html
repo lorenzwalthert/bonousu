@@ -136,11 +136,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">2.5</span> Nested code</h2>
 <p>Line indentation is great, but if you hit the third level of nesting, you should maybe consider an approach that does not require so many sub-levels of code.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># bad</span>
-if (x ==<span class="st"> </span>T){
+if (x ==<span class="st"> </span><span class="ot">TRUE</span>){
   for (i in <span class="dv">4</span>:<span class="dv">13</span>){
-    if (z[i] ==<span class="st"> </span>T){
+    if (z[i] ==<span class="st"> </span><span class="ot">TRUE</span>){
       <span class="co"># ...</span>
-    } else if (t ==<span class="st"> </span>T){
+    } else if (t ==<span class="st"> </span><span class="ot">TRUE</span>){
 <span class="co"># .... </span></code></pre></div>
 <p>In many cases, you can use functions to avoid nesting, in certain cases, the specific functions you want to create are <em>recursive functions</em>.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> A great way to get rid of nested code related to for loops is to replace them with functionals. We do not want to dive into that further here, since Hadley Wickham’s book <a href="http://adv-r.had.co.nz/Functionals.html">Advanced R</a> covers the material quite nicely. However, let us just quickly discuss an example in the context of good style.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>

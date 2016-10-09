@@ -142,8 +142,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case_irrelevant &lt;-<span class="st"> </span><span class="kw">grep</span>(<span class="st">&quot;Look&quot;</span>, <span class="st">&quot;the value to look&quot;</span>, <span class="dt">ignore.case =</span> <span class="ot">TRUE</span>)
 case_relevant   &lt;-<span class="st"> </span><span class="kw">grep</span>(<span class="st">&quot;look&quot;</span>, <span class="st">&quot;the value to look&quot;</span>, <span class="dt">ignore.case =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p>Regarding the order of the arguments, it is a good convention to stick to the default, even if you name the arguments. How long does it take you to spot the all differences in the following two commands?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># bad</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
 <span class="kw">cut</span>(<span class="dv">3</span>:<span class="dv">19</span>, <span class="dt">breaks =</span> <span class="dv">2</span>, <span class="dt">right =</span> <span class="ot">TRUE</span>, <span class="dt">include.lowest =</span> <span class="ot">FALSE</span>)
+<span class="co"># bad</span>
 <span class="kw">cut</span>(<span class="dt">include.lowest =</span> <span class="ot">TRUE</span>, <span class="dt">breaks =</span> <span class="dv">3</span>:<span class="dv">5</span>, <span class="dt">right =</span> <span class="ot">FALSE</span>, <span class="dt">x =</span> <span class="dv">3</span>:<span class="dv">19</span>)</code></pre></div>
 
 </div>

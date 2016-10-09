@@ -136,15 +136,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">2.6</span> Conditional statements</h2>
 <p>Much has been written about conditional statements. Since they are such an essential element of R programming and programming in general, it should be part of this book. In principal, R lets you write a whole <em>if-else-statement</em> in one line. That is four times less than using the verbose form. In the light of these, relationships, it might be ok to use the <em>one-liner</em> for very short statements.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># concise</span>
-if (fail ==<span class="st"> </span><span class="ot">FALSE</span>) <span class="kw">message</span>(<span class="st">&quot;hi&quot;</span>) else <span class="kw">message</span>(<span class="st">&quot;bye&quot;</span>)
-<span class="co"># verbose</span>
+if (fail ==<span class="st"> </span><span class="ot">TRUE</span>) <span class="kw">message</span>(<span class="st">&quot;fail&quot;</span>) else <span class="kw">message</span>(<span class="st">&quot;no fail&quot;</span>)</code></pre></div>
+<pre><code>## no fail</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># verbose</span>
 if (fail ==<span class="st"> </span><span class="ot">TRUE</span>) {
-  <span class="kw">message</span>(<span class="st">&quot;hi&quot;</span>) 
+  <span class="kw">message</span>(<span class="st">&quot;fail&quot;</span>) 
 } else {
-  <span class="kw">message</span>(<span class="st">&quot;bye&quot;</span>)
+  <span class="kw">message</span>(<span class="st">&quot;no fail&quot;</span>)
 }</code></pre></div>
+<pre><code>## no fail</code></pre>
 <p>Especially for very short conditional statements, you might want to resort to the function <code>ifelse</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ifelse</span>(fail ==<span class="st"> </span><span class="ot">FALSE</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ifelse</span>(fail ==<span class="st"> </span><span class="ot">TRUE</span>, 
        <span class="dt">yes =</span> <span class="st">&quot;the test did fail&quot;</span>, 
        <span class="dt">no  =</span> <span class="st">&quot;the test did not fail&quot;</span>)</code></pre></div>
 <p><code>ifelse</code> can also take a vectorized input, which makes it even more useful to eliminate loops.</p>
@@ -160,6 +162,25 @@ for (i in <span class="kw">seq_along</span>(x)){
     <span class="kw">print</span>(<span class="kw">sqrt</span>(x[i]))
   }
 }</code></pre></div>
+<p>Note that double negation is not desirable in conditional statements, although it technically works fine. Also, it seems quite natrual to put a <em>true</em> condition first, or the condition that is expected to apply mostly.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
+if (fail ==<span class="st"> </span><span class="ot">TRUE</span>){
+  <span class="kw">message</span>(<span class="st">&quot;the test failed&quot;</span>)
+}
+
+<span class="co"># bad</span>
+if (fail !=<span class="st"> </span><span class="ot">FALSE</span>){
+  <span class="kw">message</span>(<span class="st">&quot;the test failed&quot;</span>)
+}</code></pre></div>
+<p>Alternatively, you might want to define the variable <code>success = 1 - fail</code> instead of <code>fail</code> in order to not get confused.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good </span>
+if (success ==<span class="st"> </span><span class="ot">TRUE</span>){
+  <span class="kw">message</span>(<span class="st">&quot;the test succeeded&quot;</span>)
+}
+<span class="co"># bad</span>
+if(fail !=<span class="st"> </span><span class="ot">FALSE</span>){
+  <span class="kw">message</span>(<span class="st">&quot;the test did not succeede&quot;</span>)
+}</code></pre></div>
 <p><em>If statements</em> can also be used in other contexts:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;the test did&quot;</span>, if(fail ==<span class="st"> </span><span class="ot">FALSE</span>) <span class="st">&quot;not&quot;</span>, <span class="st">&quot;fail&quot;</span>)</code></pre></div>
 <p>A very verbose alternative would be:</p>
@@ -171,13 +192,15 @@ for (i in <span class="kw">seq_along</span>(x)){
 <p>If the duplication should be avoided, one needs to create a variable.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if (fail ==<span class="st"> </span><span class="ot">FALSE</span>){
   msg &lt;-<span class="st"> &quot;not&quot;</span>
+} else { 
+  msg &lt;-<span class="st"> </span><span class="ot">NULL</span>
 }
 <span class="kw">paste</span>(<span class="st">&quot;the test did&quot;</span>, msg, <span class="st">&quot;fail&quot;</span>)
 <span class="kw">rm</span>(msg)</code></pre></div>
 <p>When an assignment to a variable is conditional, the following is possible.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>
 <span class="st">  </span>if (fail ==<span class="st"> </span><span class="ot">TRUE</span>) {
-    <span class="kw">rpois</span>(<span class="dv">10</span>)
+    <span class="kw">rpois</span>(<span class="dv">10</span>, <span class="dt">lambda =</span> <span class="dv">2</span>)
   } else {
     <span class="kw">rnorm</span>(<span class="dv">10</span>)
   }</code></pre></div>
@@ -226,7 +249,6 @@ switch(outcome,
        <span class="dt">just_passed =</span> <span class="st">&quot;lucky you&quot;</span>,
        <span class="dt">passed =</span> <span class="st">&quot;the test did not fail&quot;</span>,
        <span class="dt">excelled =</span> <span class="st">&quot;you must be Einstein&quot;</span>)</code></pre></div>
-<pre><code>## [1] &quot;you must be Einstein&quot;</code></pre>
 </div>
             </section>
 

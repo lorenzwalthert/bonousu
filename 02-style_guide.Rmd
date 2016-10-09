@@ -8,12 +8,12 @@ style.
 After the summary, the pros and cons of certain approaches are 
 discussed in more depth.
 ```{r, include = FALSE}
-knitr::opts_chunk$set(eval = FALSE) # disable eval
+knitr::opts_chunk$set(results = 'hide') # disable eval
 ```
 
 ## Naming 
 ### Naming files
-```{r}
+```{r, eval=FALSE}
 # good
 reduce_matrix.R
 # bad
@@ -24,7 +24,7 @@ applies for the directory where it is stored. Changing the name or location of
 a file later can cause a number of problems: 
 
 * outdated dependencies due to invalid paths.
-* removed history in the version control system (e.g. not with `git mv`)if 
+* removed history in the version control system (e.g. not with `git mv`) if 
 renaming is not done properly.
 ^[See [this](http://rogerdudler.github.io/git-guide/) website for a quick 
 introduction to git, a popular version control system.]
@@ -88,11 +88,11 @@ following considerations are worth taking into account:
 
 To sum it up, here are a couple of bad examples for the cases described 
 above. 
-```{r}
+```{r, eval = FALSE}
 # version number in file name
 cleaning_3.R
 # special character
-is_it_correct'.Rmd
+is_it_correct/.Rmd
 
 # length
 this_name_is_expressive_but_will_always_be_truncated_and_hence_useless.pdf
@@ -100,7 +100,7 @@ this_name_is_expressive_but_will_always_be_truncated_and_hence_useless.pdf
 vp8rm_fs.R
 ```
 Do not use these pairs of examples simultaneously.
-```{r}
+```{r, eval = FALSE}
 # avoid synonyms
 quick_data_check.R 
 fast_data_check.R
@@ -109,7 +109,7 @@ fast_data_check.R
 15_Feb2016.csv
 ```
 On the other hand, these file names meet the criteria outlined before.
-```{r}
+```{r, eval = FALSE}
 # lower case names
 showcase_outlier.Rmd
 # underscore as a separator
@@ -123,7 +123,7 @@ for_mint.R
 ```
 
 ### Naming objects
-```{r}
+```{r, eval = FALSE}
 # good
 reduce_matrix # for a function
 reduced_matrix # for a variable
@@ -164,7 +164,7 @@ the benefit of using the so called *assignment operator* instead of the equals
 sign, the main advantage is that that an *asignment context* can be 
 distinguished with ease from other contexts, for example from a function call, 
 from a list creation and from a comparison of two objects.
-```{r}
+```{r, eval = FALSE}
 f(a = 1, b = TRUE)
 list(a = 1:3, 
      b = sample(letters[1:4]))
@@ -206,6 +206,11 @@ wrapped in the same type of quotes.
 ## Line indentation
 Indenting code makes it more legible. For example, you can see where a 
 conditional statement starts and where it ends.
+```{r, include = FALSE}
+condition <- TRUE
+another_condition <- TRUE
+```
+
 ```{r}
 # good 
 if (condition == TRUE){
@@ -256,7 +261,8 @@ that too.
 Line indentation is great, but if you hit the third level of nesting, you 
 should maybe consider an approach that does not require so many sub-levels of
 code. 
-```{r}
+
+```{r, eval = FALSE}
 # bad
 if (x == TRUE){
   for (i in 4:13){
@@ -273,7 +279,7 @@ with functionals. We do not want to dive into that further here, since Hadley
 Wickham's book [Advanced R](http://adv-r.had.co.nz/Functionals.html) covers the 
 material quite nicely. However, let us just quickly discuss an example in the 
 context of good style.
-```{r, results= 'hide'}
+```{r}
 # good
 lapply(mtcars, class)
 # bad
@@ -306,20 +312,25 @@ element of R programming and programming in general, it should be part of this
 book. In principal, R lets you write a whole *if-else-statement* in one line. 
 That is four times less than using the verbose form. In the light of these, 
 relationships, it might be ok to use the *one-liner* for very short statements.
+```{r, include = FALSE}
+fail <-    sample(c(TRUE, FALSE), 1)
+success <- sample(c(TRUE, FALSE), 1)
+```
+
 ```{r}
 # concise
-if (fail == FALSE) message("hi") else message("bye")
+if (fail == TRUE) message("fail") else message("no fail")
 # verbose
 if (fail == TRUE) {
-  message("hi") 
+  message("fail") 
 } else {
-  message("bye")
+  message("no fail")
 }
 ```
 Especially for very short conditional statements, you might want to resort to 
 the function `ifelse`.
 ```{r}
-ifelse(fail == FALSE, 
+ifelse(fail == TRUE, 
        yes = "the test did fail", 
        no  = "the test did not fail")
 ```
@@ -339,6 +350,33 @@ for (i in seq_along(x)){
   }
 }
 ```
+Note that double negation is not desirable in conditional statements, although
+it technically works fine. Also, it seems quite natrual to put a *true* condition
+first, or the condition that is expected to apply mostly.
+```{r}
+# good
+if (fail == TRUE){
+  message("the test failed")
+}
+
+# bad
+if (fail != FALSE){
+  message("the test failed")
+}
+```
+Alternatively, you might want to define the variable `success = 1 - fail` 
+instead of `fail` in order to not get confused.
+```{r}
+# good 
+if (success == TRUE){
+  message("the test succeeded")
+}
+# bad
+if(fail != FALSE){
+  message("the test did not succeede")
+}
+```
+
 
 *If statements* can also be used in other contexts:
 ```{r}
@@ -356,6 +394,8 @@ If the duplication should be avoided, one needs to create a variable.
 ```{r}
 if (fail == FALSE){
   msg <- "not"
+} else { 
+  msg <- NULL
 }
 paste("the test did", msg, "fail")
 rm(msg)
@@ -364,14 +404,14 @@ When an assignment to a variable is conditional, the following is possible.
 ```{r}
 x <- 
   if (fail == TRUE) {
-    rpois(10)
+    rpois(10, lambda = 2)
   } else {
     rnorm(10)
   }
 ```
 Boolean conditional statements can be abbreviated. The following two
 *if statements* are identical. 
-```{r}
+```{r, eval = FALSE}
 if (!cond){
   # do xyz
 }
@@ -415,7 +455,7 @@ Also, lazy evaluation can be useful in combination with conditional statements.
 For example, you might want to so something within a function based on an input 
 value. However, you do not know whether the value was supplied in the first 
 place. Here are two ways to deal with that situation.
-```{r}
+```{r, eval = FALSE}
 # good 
 if (!missing(x) && x > 10) {
   # your code
@@ -432,7 +472,7 @@ Finally, an alternative to *if statements* is the function `switch()` if the
 condition is of class character, especially if there are many conditions to 
 test. Note that switch expects a match and returns an invisible `NULL` if the 
 condition does not match with any option given.
-```{r, eval = TRUE}
+```{r}
 outcome <- "excelled"
 switch(outcome, 
        fail  = "the test did fail", 
@@ -464,8 +504,9 @@ Regarding the order of the arguments, it is a good convention to stick to the
 default, even if you name the arguments. How long does it take you to spot the
 all differences in the following two commands?
 ```{r}
-# bad
+# good
 cut(3:19, breaks = 2, right = TRUE, include.lowest = FALSE)
+# bad
 cut(include.lowest = TRUE, breaks = 3:5, right = FALSE, x = 3:19)
 ```
 

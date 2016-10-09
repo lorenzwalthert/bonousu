@@ -143,7 +143,7 @@ rM_1.r</code></pre></div>
 <p>At the point of creating files, it is important to choose a good name. The same applies for the directory where it is stored. Changing the name or location of a file later can cause a number of problems:</p>
 <ul>
 <li>outdated dependencies due to invalid paths.</li>
-<li>removed history in the version control system (e.g. not with <code>git mv</code>)if renaming is not done properly. <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></li>
+<li>removed history in the version control system (e.g. not with <code>git mv</code>) if renaming is not done properly. <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></li>
 <li>discontinuity in the history. It is hard to find renamed files.</li>
 <li>processes that take the file name as an input and return an output that is related to this name are problematic. For example, when creating an html file from an Rmd file via <code>knitr()</code>, the created object has the same name (but a different suffix) as the Rmd file. If you change the name, the old html file will still be there but a new html file with the new name will also be there. Most likely, you need to clean up manually.</li>
 </ul>
@@ -167,12 +167,12 @@ rM_1.r</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># version number in file name</span>
 cleaning_3.R
 <span class="co"># special character</span>
-is_it_correct<span class="st">&#39;.Rmd</span>
+is_it_correct/.Rmd
 
-<span class="st"># length</span>
-<span class="st">this_name_is_expressive_but_will_always_be_truncated_and_hence_useless.pdf</span>
-<span class="st"># (uncommon) abbreviations</span>
-<span class="st">vp8rm_fs.R</span></code></pre></div>
+<span class="co"># length</span>
+this_name_is_expressive_but_will_always_be_truncated_and_hence_useless.pdf
+<span class="co"># (uncommon) abbreviations</span>
+vp8rm_fs.R</code></pre></div>
 <p>Do not use these pairs of examples simultaneously.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># avoid synonyms</span>
 quick_data_check.R 
