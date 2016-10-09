@@ -102,8 +102,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="code-style-guide.html"><a href="code-style-guide.html"><i class="fa fa-check"></i><b>2</b> Code style guide</a><ul>
-<li class="chapter" data-level="2.1" data-path="code-style-guide.html"><a href="code-style-guide.html#assignment"><i class="fa fa-check"></i><b>2.1</b> Assignment</a></li>
-<li class="chapter" data-level="2.2" data-path="code-style-guide.html"><a href="code-style-guide.html#quotes"><i class="fa fa-check"></i><b>2.2</b> Quotes</a></li>
+<li class="chapter" data-level="2.1" data-path="code-style-guide.html"><a href="code-style-guide.html#naming"><i class="fa fa-check"></i><b>2.1</b> Naming</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="code-style-guide.html"><a href="code-style-guide.html#naming-files"><i class="fa fa-check"></i><b>2.1.1</b> Naming files</a></li>
+<li class="chapter" data-level="2.1.2" data-path="code-style-guide.html"><a href="code-style-guide.html#naming-objects"><i class="fa fa-check"></i><b>2.1.2</b> Naming objects</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="code-style-guide.html"><a href="code-style-guide.html#assignment"><i class="fa fa-check"></i><b>2.2</b> Assignment</a></li>
+<li class="chapter" data-level="2.3" data-path="code-style-guide.html"><a href="code-style-guide.html#quotes"><i class="fa fa-check"></i><b>2.3</b> Quotes</a></li>
+<li class="chapter" data-level="2.4" data-path="code-style-guide.html"><a href="code-style-guide.html#line-indention"><i class="fa fa-check"></i><b>2.4</b> Line indention</a></li>
+<li class="chapter" data-level="2.5" data-path="code-style-guide.html"><a href="code-style-guide.html#nested-code"><i class="fa fa-check"></i><b>2.5</b> Nested code</a></li>
+<li class="chapter" data-level="2.6" data-path="code-style-guide.html"><a href="code-style-guide.html#conditional-statements"><i class="fa fa-check"></i><b>2.6</b> Conditional statements</a></li>
+<li class="chapter" data-level="2.7" data-path="code-style-guide.html"><a href="code-style-guide.html#argument-specification"><i class="fa fa-check"></i><b>2.7</b> Argument specification</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="workflow-collaboration.html"><a href="workflow-collaboration.html"><i class="fa fa-check"></i><b>3</b> Workflow &amp; collaboration</a></li>
 <li class="chapter" data-level="4" data-path="package-development.html"><a href="package-development.html"><i class="fa fa-check"></i><b>4</b> Package development</a></li>
@@ -126,7 +134,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="introduction" class="section level1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
-<p>Welcome to <em>bono usu</em>, a book about good practice for R programming. This book tries to compile and further build upon resources on the topic of good practice in R programming in a somewhat broad sense. We acknowledge that there is no clear ‘best practice’ when it comes to many aspects of R code style, workflow etc, but there are certainly some principles which can direct one towards ‘better practice’.<br />
+<p>Welcome to <em>bono usu</em>, a book about good practice for R programming. This book tries to compile and further build upon resources on the topic of good practice in R programming in a somewhat broad sense. Mainly, Hadley Wickham’s <a href="http://adv-r.had.co.nz/Style.html">style section</a> in Advanced R and <a href="https://google.github.io/styleguide/Rguide.xml">Google’s R Style Guide</a> served as points of reference for this book. We acknowledge that there is no clear ‘best practice’ when it comes to many aspects of R code style, workflow etc, but there are certainly some principles which can direct one towards ‘better practice’.<br />
 <br />
 When collaborating with others on code projects it is hugely beneficial (if not essential) to agree on and abide by some style guidelines and workflow in order to facilitate the process of collaboration. The aim of this book is to bring together some popular opinion, convention, and/or suggested practice which has helped to inform us in facilitating our own consensus on ‘good practice’.<br />
 <br />
@@ -136,6 +144,8 @@ The book covers the following topics:</p>
 <li>Workflow &amp; collaboration: In this chapter, we introduce some commonly used workflow tools, and explore how one can make the most of them, while taking a broader perspective on high-level practices in the organisation of projects.</li>
 <li>Package development: Finally, we address the topic of developing extensions for R.</li>
 </ul>
+<p><br />
+The target audience of the book are R users that have reached an intermediate level. However, we try to include reference material to some fundamental concepts that one needs to be familiar with in order to follow the author’s reasoning.</p>
 
 </div>
             </section>
