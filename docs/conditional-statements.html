@@ -143,14 +143,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Much has been written about conditional statements. Since they are such an essential element of R programming and programming in general, it should be part of this book. In principal, R lets you write a whole <em>if-else-statement</em> in one line. That is four times less than using the verbose form. In the light of these, relationships, it might be ok to use the <em>one-liner</em> for very short statements.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># concise</span>
 if (fail ==<span class="st"> </span><span class="ot">TRUE</span>) <span class="kw">message</span>(<span class="st">&quot;fail&quot;</span>) else <span class="kw">message</span>(<span class="st">&quot;no fail&quot;</span>)</code></pre></div>
-<pre><code>## no fail</code></pre>
+<pre><code>## fail</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># verbose</span>
 if (fail ==<span class="st"> </span><span class="ot">TRUE</span>) {
   <span class="kw">message</span>(<span class="st">&quot;fail&quot;</span>) 
 } else {
   <span class="kw">message</span>(<span class="st">&quot;no fail&quot;</span>)
 }</code></pre></div>
-<pre><code>## no fail</code></pre>
+<pre><code>## fail</code></pre>
 <p>Especially for very short conditional statements, you might want to resort to the function <code>ifelse</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ifelse</span>(fail ==<span class="st"> </span><span class="ot">TRUE</span>, 
        <span class="dt">yes =</span> <span class="st">&quot;the test did fail&quot;</span>, 
@@ -172,12 +172,13 @@ for (i in <span class="kw">seq_along</span>(x)){
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
 if (fail ==<span class="st"> </span><span class="ot">TRUE</span>){
   <span class="kw">message</span>(<span class="st">&quot;the test failed&quot;</span>)
-}
-
-<span class="co"># bad</span>
+}</code></pre></div>
+<pre><code>## the test failed</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># bad</span>
 if (fail !=<span class="st"> </span><span class="ot">FALSE</span>){
   <span class="kw">message</span>(<span class="st">&quot;the test failed&quot;</span>)
 }</code></pre></div>
+<pre><code>## the test failed</code></pre>
 <p>Alternatively, you might want to define the variable <code>success = 1 - fail</code> instead of <code>fail</code> in order to not get confused.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good </span>
 if (success ==<span class="st"> </span><span class="ot">TRUE</span>){
@@ -188,6 +189,7 @@ if (success ==<span class="st"> </span><span class="ot">TRUE</span>){
 if(fail !=<span class="st"> </span><span class="ot">FALSE</span>){
   <span class="kw">message</span>(<span class="st">&quot;the test did not succeede&quot;</span>)
 }</code></pre></div>
+<pre><code>## the test did not succeede</code></pre>
 <p><em>If statements</em> can also be used in other contexts:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;the test did&quot;</span>, if(fail ==<span class="st"> </span><span class="ot">FALSE</span>) <span class="st">&quot;not&quot;</span>, <span class="st">&quot;fail&quot;</span>)</code></pre></div>
 <p>A very verbose alternative would be:</p>
