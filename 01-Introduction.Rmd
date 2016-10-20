@@ -1,20 +1,20 @@
 # Introduction
 Welcome to *bono usu*, a book about good practice for R programming. This book
-tries to compile and further build upon resources on the topic of good practice 
-in R programming in a somewhat broad sense. Mainly, Hadley Wickham's [style 
-section](http://adv-r.had.co.nz/Style.html) in Advanced R and 
-[Google's R Style Guide](https://google.github.io/styleguide/Rguide.xml)
-served as points of reference for this book. 
-We acknowledge that there is no 
-clear 'best practice' when it comes to many aspects of R code style, workflow 
-etc, but there are certainly some principles which can direct one towards 
-'better practice'.  
+aims to provide some principled guidelines on a range of topics relating to the 
+'practice' of R programming , largely by drawing upon existing resources and 
+consensus from within the R community. In particular, Hadley Wickham's 
+[style section](http://adv-r.had.co.nz/Style.html) in Advanced R and 
+[Google's R Style Guide](https://google.github.io/styleguide/Rguide.xml) served 
+as key points of reference for the chapter on R code style. We acknowledge that 
+there is no clear 'best practice' when it comes to many aspects of R 
+programming, workflow etc, but there are certainly some principles which can 
+direct one towards 'better practice'.  
 \
 When collaborating with others on code projects it is hugely beneficial (if not 
 essential) to agree on and abide by some style guidelines and workflow in order 
-to facilitate the process of collaboration. The aim of this book is to bring 
-together some popular opinion, convention, and/or suggested practice which has
-helped to inform us in facilitating our own consensus on 'good practice'.  
+to facilitate the process of collaboration. In the chapters which follow we will
+bring together some popular opinion, convention, and/or suggested practice which 
+has helped to inform us in facilitating our own consensus on 'good practice'.  
 \
 The book covers the following topics:
 
