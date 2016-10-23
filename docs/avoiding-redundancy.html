@@ -8,7 +8,7 @@
   <title>Bono Usu</title>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Bono Usu">
-  <meta name="generator" content="bookdown 0.1.14 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.1 and GitBook 2.6.7">
 
   <meta property="og:title" content="Bono Usu" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,6 @@
 
 <meta name="author" content="Jon Calder &amp; Lorenz Walthert">
 
-  
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="introduction.html">
-<link rel="next" href="naming.html">
+<link rel="prev" href="conditional-statements.html">
+<link rel="next" href="argument-specification.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -125,9 +124,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.9.2" data-path="conditional-statements.html"><a href="conditional-statements.html#simplifying-conditionals"><i class="fa fa-check"></i><b>2.9.2</b> Simplifying conditionals</a></li>
 <li class="chapter" data-level="2.9.3" data-path="conditional-statements.html"><a href="conditional-statements.html#formulation-of-conditions"><i class="fa fa-check"></i><b>2.9.3</b> Formulation of conditions</a></li>
 <li class="chapter" data-level="2.9.4" data-path="conditional-statements.html"><a href="conditional-statements.html#conditional-assignment"><i class="fa fa-check"></i><b>2.9.4</b> Conditional assignment</a></li>
-<li class="chapter" data-level="2.9.5" data-path="conditional-statements.html"><a href="conditional-statements.html#avoiding-redundancy"><i class="fa fa-check"></i><b>2.9.5</b> Avoiding redundancy</a></li>
 </ul></li>
-<li class="chapter" data-level="2.10" data-path="argument-specification.html"><a href="argument-specification.html"><i class="fa fa-check"></i><b>2.10</b> Argument specification</a></li>
+<li class="chapter" data-level="2.10" data-path="avoiding-redundancy.html"><a href="avoiding-redundancy.html"><i class="fa fa-check"></i><b>2.10</b> Avoiding redundancy</a></li>
+<li class="chapter" data-level="2.11" data-path="argument-specification.html"><a href="argument-specification.html"><i class="fa fa-check"></i><b>2.11</b> Argument specification</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="workflow-collaboration.html"><a href="workflow-collaboration.html"><i class="fa fa-check"></i><b>3</b> Workflow &amp; collaboration</a></li>
 <li class="chapter" data-level="4" data-path="package-development.html"><a href="package-development.html"><i class="fa fa-check"></i><b>4</b> Package development</a></li>
@@ -148,19 +147,43 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="code-style-guide" class="section level1">
-<h1><span class="header-section-number">2</span> Code style guide</h1>
-<p>This chapter deals mostly with low-level coding style. Every section starts with a code chunk to quickly highlight the principle of that section. Depending on how strongly we agree/disagree with a certain practice, we use <code># good / bad</code> or <code># advised / discouraged</code> to indicate the importance of adhering to a certain style.<br />
-<br />
-After the summary, the pros and cons of certain approaches are discussed in more depth.</p> 
+<div id="avoiding-redundancy" class="section level2">
+<h2><span class="header-section-number">2.10</span> Avoiding redundancy</h2>
+<p>Note that for conditional statements, the order matters if the conditions are not mutually exclusive. In other words, when all values in the above example are <code>TRUE</code>, then also some are. So exchanging the <em>if</em> and the <em>else if</em> statement will never print the message that all values are true, because the first condition already applies. To fix that you could be tempted to do the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if (<span class="kw">any</span>(boolean) &amp;<span class="st"> </span>!<span class="kw">all</span>(boolean)){
+  <span class="st">&quot;at least some values are TRUE. This is quite likely.&quot;</span>
+} else if (<span class="kw">all</span>(boolean)){
+  <span class="st">&quot;all values are TRUE. That can&#39;t be true.&quot;</span>
+} else {
+  <span class="st">&quot;not a single TRUE value?&quot;</span>
+}</code></pre></div>
+<p>Clearly changing the ordering of the conditional statements like this creates redundancy and should thus be avoided.</p>
+<p>Also, lazy evaluation<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a> can be useful in combination with conditional statements. For example, you might want to so something within a function based on an input value. However, you do not know whether the value was supplied in the first place. Here are two ways to deal with that situation.<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good </span>
+if (!<span class="kw">missing</span>(x) &amp;&amp;<span class="st"> </span>x &gt;<span class="st"> </span><span class="dv">10</span>) {
+  <span class="co"># your code</span>
+}
+<span class="co"># bad</span>
+if (!<span class="kw">missing</span>(x)){
+  if(x &gt;<span class="st"> </span><span class="dv">10</span> ){
+   <span class="co"># your code </span>
+  }
+}</code></pre></div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="7">
+<li id="fn7"><p>note that <code>&amp;&amp;</code> and <code>||</code> are the lazy equivalents of <code>&amp;</code> and <code>|</code>, i.e. using <code>&amp;</code> in the below example would raise an error because the second statement cannot be evaluated. With <code>&amp;&amp;</code> it does not get evaluated because the first statement returns <code>FALSE</code><a href="avoiding-redundancy.html#fnref7">↩</a></p></li>
+<li id="fn8"><p>If not used in the context of a function, you might use <code>exists(&quot;x&quot;)</code> instead of <code>missing(x)</code><a href="avoiding-redundancy.html#fnref8">↩</a></p></li>
+</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="naming.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="conditional-statements.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="argument-specification.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>

@@ -8,7 +8,7 @@
   <title>Bono Usu</title>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Bono Usu">
-  <meta name="generator" content="bookdown 0.1 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.1.14 and GitBook 2.6.7">
 
   <meta property="og:title" content="Bono Usu" />
   <meta property="og:type" content="book" />
@@ -25,6 +25,7 @@
 
 <meta name="author" content="Jon Calder &amp; Lorenz Walthert">
 
+  
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -203,13 +204,23 @@ if(boolean ==<span class="st"> </span><span class="ot">TRUE</span>) {
 <h3><span class="header-section-number">2.9.2</span> Simplifying conditionals</h3>
 <p>In principal, R lets you write a whole <em>if-else-statement</em> in one line. That is five times less than using the verbose form. In the light of these relations, it might be ok to use the <em>one-liner</em> for very short statements. However, when the situation gets more complex, using a verbose form is adviced to maintain code which is well understandable.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># concise</span>
+<<<<<<< HEAD
 if (fail ==<span class="st"> </span><span class="ot">TRUE</span>) <span class="kw">message</span>(<span class="st">&quot;fail&quot;</span>) else <span class="kw">message</span>(<span class="st">&quot;no fail&quot;</span>)
 <span class="co"># verbose</span>
+=======
+if (fail ==<span class="st"> </span><span class="ot">TRUE</span>) <span class="kw">message</span>(<span class="st">&quot;fail&quot;</span>) else <span class="kw">message</span>(<span class="st">&quot;no fail&quot;</span>)</code></pre></div>
+<pre><code>## no fail</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># verbose</span>
+>>>>>>> 98e8a51e2376242c5ec6bf6465dfb2e6dfeaba60
 if (fail ==<span class="st"> </span><span class="ot">TRUE</span>) {
   <span class="kw">message</span>(<span class="st">&quot;fail&quot;</span>) 
 } else {
   <span class="kw">message</span>(<span class="st">&quot;no fail&quot;</span>)
 }</code></pre></div>
+<<<<<<< HEAD
+=======
+<pre><code>## no fail</code></pre>
+>>>>>>> 98e8a51e2376242c5ec6bf6465dfb2e6dfeaba60
 <p>Especially for very short conditional statements, you might want to resort to the function <code>ifelse</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ifelse</span>(fail, 
        <span class="st">&quot;the test did fail&quot;</span>, 
@@ -227,6 +238,7 @@ for (i in <span class="kw">seq_along</span>(x)){
     <span class="kw">print</span>(<span class="kw">sqrt</span>(x[i]))
   }
 }</code></pre></div>
+<<<<<<< HEAD
 <p>An alternative to <code>ifelse</code> is the function <code>switch()</code> if the condition is of class character, especially if there are many conditions to test. Note that switch expects a match and returns an invisible <code>NULL</code> if the condition does not match with any option given. Also, note that switch is not particularly flexible since it uses non-standard evaluation and cannot handle numeric input.<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">outcome &lt;-<span class="st"> &quot;excelled&quot;</span>
 switch(outcome, 
@@ -234,6 +246,27 @@ switch(outcome,
        <span class="dt">just_passed =</span> <span class="st">&quot;lucky you&quot;</span>,
        <span class="dt">passed =</span> <span class="st">&quot;the test did not fail&quot;</span>,
        <span class="dt">excelled =</span> <span class="st">&quot;you must be Einstein&quot;</span>)</code></pre></div>
+=======
+<p>Note that double negation is not desirable in conditional statements, although it technically works fine. Also, it seems quite natural to put a <em>true</em> condition first, or the condition that is expected to apply mostly.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
+if (fail ==<span class="st"> </span><span class="ot">TRUE</span>){
+  <span class="kw">message</span>(<span class="st">&quot;the test failed&quot;</span>)
+}
+
+<span class="co"># bad</span>
+if (fail !=<span class="st"> </span><span class="ot">FALSE</span>){
+  <span class="kw">message</span>(<span class="st">&quot;the test failed&quot;</span>)
+}</code></pre></div>
+<p>Alternatively, you might want to define the variable <code>success = 1 - fail</code> instead of <code>fail</code> in order to not get confused.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good </span>
+if (success ==<span class="st"> </span><span class="ot">TRUE</span>){
+  <span class="kw">message</span>(<span class="st">&quot;the test succeeded&quot;</span>)
+}
+<span class="co"># bad</span>
+if(fail !=<span class="st"> </span><span class="ot">FALSE</span>){
+  <span class="kw">message</span>(<span class="st">&quot;the test did not succeede&quot;</span>)
+}</code></pre></div>
+>>>>>>> 98e8a51e2376242c5ec6bf6465dfb2e6dfeaba60
 <p><em>If statements</em> can also be used in other contexts:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
 <span class="kw">paste</span>(<span class="st">&quot;the test did&quot;</span>, if(fail ==<span class="st"> </span><span class="ot">FALSE</span>) <span class="st">&quot;not&quot;</span>, <span class="st">&quot;fail&quot;</span>)</code></pre></div>

@@ -19,9 +19,9 @@ reduce_matrix.R
 # bad
 rM_1.r
 ```
-At the point of creating files, it is important to choose a good name. The same 
-applies for the directory where it is stored. Changing the name or location of 
-a file later can cause a number of problems: 
+When creating a file, it is important to choose a good name. The same 
+applies for the names of directories into files are organised. Changing the name 
+or location of a file later can cause a number of problems:  
 
 * outdated dependencies due to invalid paths.
 * removed history in the version control system (e.g. not with `git mv`) if 
@@ -41,19 +41,13 @@ following considerations are worth taking into account:
 
 * Sometimes, there are restrictions in place for file names (e.g. the package 
   `testthat` used in package development requires that all files pertaining to 
-  testing start with "test" and live in a particular folder).
-* Do use expressive but concise names. Describe the function of the file 
+  testing start with "test" and reside in a particular directory).
+* Use expressive but concise names. Describe the function of the file 
   (`clean_temperature_data.R`), what it inputs or outputs 
   (`daily_to_monthly_transformation.R`), how it relates to other files (e.g. 
   `helper_sort.R` is a helper function for a sort routine) and so on.
 * Do not use version numbers in the file name. Use a version control system 
   like git instead.
-* Use all lower case names. One motivation for this is that it can save 
-  keystrokes and improving typing efficiency. Possibly more important though is 
-  that when recalling functions (given that R is case-sensitive), either 
-  yourself or other R developers and users will have a harder time remembering 
-  what case you used for a function name. Instead of using camelCase, separate 
-  elements of the name with an underscore.
 * It can be advantageous to use a combination of numbers and descriptive words 
   as a file name. This allows you to a) select files efficiently with bash or 
   even keyboard navigation in a user interface and b) can be informative if you 
@@ -136,6 +130,12 @@ like to highlight the following:
 
 * use verbs for functions and nouns for variables. This helps you distinguish 
   objects into categories.
+* Use all lower case names for functions. One motivation for this is that it can 
+  save keystrokes and improve typing efficiency. Possibly more important though 
+  is that - given that R is case-sensitive - all lower-case function names will 
+  be easier for other R developers and users (as well as you yourself) to recall 
+  when wanting to make use of a function. Instead of using camelCase, separate 
+  elements of the name with an underscore.
 * do not use the dot within object names. It gives them the appearance of 
   methods
 * Avoid function names and variable names that already exist or have a 
@@ -162,8 +162,9 @@ a = 2
 Although programmers coming from other languages may not immediately see
 the benefit of using the so called *assignment operator* instead of the equals
 sign, the main advantage is that that an *asignment context* can be 
-distinguished with ease from other contexts, for example from a function call, 
-from a list creation and from a comparison of two objects.
+distinguished with ease from other contexts where an equals sign may be used 
+e.g. defining arguments within a function call, naming elements within a list, 
+or comparing two objects.
 ```{r, eval = FALSE}
 f(a = 1, b = TRUE)
 list(a = 1:3, 

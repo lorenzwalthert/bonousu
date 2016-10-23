@@ -8,7 +8,7 @@
   <title>Bono Usu</title>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Bono Usu">
-  <meta name="generator" content="bookdown 0.1 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.1.14 and GitBook 2.6.7">
 
   <meta property="og:title" content="Bono Usu" />
   <meta property="og:type" content="book" />
@@ -25,6 +25,7 @@
 
 <meta name="author" content="Jon Calder &amp; Lorenz Walthert">
 
+  
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -155,7 +156,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 reduce_matrix.R
 <span class="co"># bad</span>
 rM_1.r</code></pre></div>
-<p>At the point of creating files, it is important to choose a good name. The same applies for the directory where it is stored. Changing the name or location of a file later can cause a number of problems:</p>
+<p>When creating a file, it is important to choose a good name. The same applies for the names of directories into files are organised. Changing the name or location of a file later can cause a number of problems:</p>
 <ul>
 <li>outdated dependencies due to invalid paths.</li>
 <li>removed history in the version control system (e.g. not with <code>git mv</code>) if renaming is not done properly. <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></li>
@@ -164,10 +165,9 @@ rM_1.r</code></pre></div>
 </ul>
 <p>Hence, you should avoid renaming files if possible. When naming files, the following considerations are worth taking into account:</p>
 <ul>
-<li>Sometimes, there are restrictions in place for file names (e.g. the package <code>testthat</code> used in package development requires that all files pertaining to testing start with “test” and live in a particular folder).</li>
-<li>Do use expressive but concise names. Describe the function of the file (<code>clean_temperature_data.R</code>), what it inputs or outputs (<code>daily_to_monthly_transformation.R</code>), how it relates to other files (e.g. <code>helper_sort.R</code> is a helper function for a sort routine) and so on.</li>
+<li>Sometimes, there are restrictions in place for file names (e.g. the package <code>testthat</code> used in package development requires that all files pertaining to testing start with “test” and reside in a particular directory).</li>
+<li>Use expressive but concise names. Describe the function of the file (<code>clean_temperature_data.R</code>), what it inputs or outputs (<code>daily_to_monthly_transformation.R</code>), how it relates to other files (e.g. <code>helper_sort.R</code> is a helper function for a sort routine) and so on.</li>
 <li>Do not use version numbers in the file name. Use a version control system like git instead.</li>
-<li>Use all lower case names. One motivation for this is that it can save keystrokes and improving typing efficiency. Possibly more important though is that when recalling functions (given that R is case-sensitive), either yourself or other R developers and users will have a harder time remembering what case you used for a function name. Instead of using camelCase, separate elements of the name with an underscore.</li>
 <li>It can be advantageous to use a combination of numbers and descriptive words as a file name. This allows you to a) select files efficiently with bash or even keyboard navigation in a user interface and b) can be informative if you want to maintain a certain order of the files (e.g. if scripts have to be run in a certain) order. However, note that if you use this system, you need to change the name of files if you want to insert an element at a position other than the end of the sequence.</li>
 <li>Since some systems are not case-sensitive, do not use file names that only differ in the case of the characters (e.g. <code>readme.md</code> and <code>README.md</code>).</li>
 <li>Choose unique file names, even across directories. This avoids confusion and allows you to find the file you are looking for very quickly with a search function or <em>go to</em> command such as the one in RStudio.</li>
@@ -217,6 +217,7 @@ convert.characters <span class="co"># resembles S3 method</span></code></pre></d
 <p>A lot of rules that were described in the above section apply for naming objects (in the sense of bindings within namespaces) as well. In particular we would like to highlight the following:</p>
 <ul>
 <li>use verbs for functions and nouns for variables. This helps you distinguish objects into categories.</li>
+<li>Use all lower case names for functions. One motivation for this is that it can save keystrokes and improve typing efficiency. Possibly more important though is that - given that R is case-sensitive - all lower-case function names will be easier for other R developers and users (as well as you yourself) to recall when wanting to make use of a function. Instead of using camelCase, separate elements of the name with an underscore.</li>
 <li>do not use the dot within object names. It gives them the appearance of methods</li>
 <li>Avoid function names and variable names that already exist or have a particular meaning. For example, <code>data()</code> is a function in base R, so it might be easier to call your data <code>x</code>, <code>dta</code>, <code>raw</code> etc. Here are a couple of other examples of bad R object names.</li>
 </ul>
