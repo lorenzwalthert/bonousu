@@ -115,8 +115,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.7.1" data-path="commenting-code.html"><a href="commenting-code.html#structuring-code"><i class="fa fa-check"></i><b>2.7.1</b> Structuring code</a></li>
 <li class="chapter" data-level="2.7.2" data-path="commenting-code.html"><a href="commenting-code.html#explaining-code"><i class="fa fa-check"></i><b>2.7.2</b> Explaining code</a></li>
 </ul></li>
-<li class="chapter" data-level="2.8" data-path="nested-code.html"><a href="nested-code.html"><i class="fa fa-check"></i><b>2.8</b> Nested code</a></li>
-<li class="chapter" data-level="2.9" data-path="conditional-statements.html"><a href="conditional-statements.html"><i class="fa fa-check"></i><b>2.9</b> Conditional statements</a></li>
+<li class="chapter" data-level="2.8" data-path="nested-code.html"><a href="nested-code.html"><i class="fa fa-check"></i><b>2.8</b> Nested code</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="nested-code.html"><a href="nested-code.html#functionals"><i class="fa fa-check"></i><b>2.8.1</b> Functionals</a></li>
+<li class="chapter" data-level="2.8.2" data-path="nested-code.html"><a href="nested-code.html#the-pipe-operator"><i class="fa fa-check"></i><b>2.8.2</b> The pipe operator</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="conditional-statements.html"><a href="conditional-statements.html"><i class="fa fa-check"></i><b>2.9</b> Conditional statements</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="conditional-statements.html"><a href="conditional-statements.html#booleans"><i class="fa fa-check"></i><b>2.9.1</b> Booleans</a></li>
+<li class="chapter" data-level="2.9.2" data-path="conditional-statements.html"><a href="conditional-statements.html#simplifying-conditionals"><i class="fa fa-check"></i><b>2.9.2</b> Simplifying conditionals</a></li>
+<li class="chapter" data-level="2.9.3" data-path="conditional-statements.html"><a href="conditional-statements.html#formulation-of-conditions"><i class="fa fa-check"></i><b>2.9.3</b> Formulation of conditions</a></li>
+<li class="chapter" data-level="2.9.4" data-path="conditional-statements.html"><a href="conditional-statements.html#conditional-assignment"><i class="fa fa-check"></i><b>2.9.4</b> Conditional assignment</a></li>
+<li class="chapter" data-level="2.9.5" data-path="conditional-statements.html"><a href="conditional-statements.html#avoiding-redundancy"><i class="fa fa-check"></i><b>2.9.5</b> Avoiding redundancy</a></li>
+</ul></li>
 <li class="chapter" data-level="2.10" data-path="argument-specification.html"><a href="argument-specification.html"><i class="fa fa-check"></i><b>2.10</b> Argument specification</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="workflow-collaboration.html"><a href="workflow-collaboration.html"><i class="fa fa-check"></i><b>3</b> Workflow &amp; collaboration</a></li>
@@ -148,7 +157,10 @@ if (x ==<span class="st"> </span><span class="ot">TRUE</span>){
       <span class="co"># ...</span>
     } else if (t ==<span class="st"> </span><span class="ot">TRUE</span>){
 <span class="co"># .... </span></code></pre></div>
-<p>In many cases, you can use functions to avoid nesting, in certain cases, the specific functions you want to create are <em>recursive functions</em>.<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a> A great way to get rid of nested code related to for loops is to replace them with functionals. We do not want to dive into that further here, since Hadley Wickham’s book <a href="http://adv-r.had.co.nz/Functionals.html">Advanced R</a> covers the material quite nicely. However, let us just quickly discuss an example in the context of good style.</p>
+<p>In many cases, you can use functions to avoid nesting, in certain cases, the specific functions you want to use are functionals or the pipe. In more advanced settings, you might want to resort to <em>recursive functions</em>.<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a></p>
+<div id="functionals" class="section level3">
+<h3><span class="header-section-number">2.8.1</span> Functionals</h3>
+<p>A great way to get rid of nested code related to for loops is to replace them with functionals. However, not all nested code can be replaced with functionals. We do not want to dive into that further here, since Hadley Wickham’s book <a href="http://adv-r.had.co.nz/Functionals.html">Advanced R</a> covers the material quite nicely. However, let us just quickly discuss an example in the context of good style. The task is to return the data types of each column in the data frame <code>mtcars</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
 <span class="kw">lapply</span>(mtcars, class)
 <span class="co"># bad</span>
@@ -164,6 +176,38 @@ for (i in <span class="kw">seq_len</span>(<span class="kw">ncol</span>(mtcars)))
       <span class="kw">print</span>(<span class="st">&quot;not 12&quot;</span>)
     }
   }, <span class="kw">character</span>(<span class="dv">1</span>)) </code></pre></div>
+</div>
+<div id="the-pipe-operator" class="section level3">
+<h3><span class="header-section-number">2.8.2</span> The pipe operator</h3>
+<p>On a related note, we should mention the pipe (<code>%&gt;%</code>), a function that was introduced in the <code>magrittr</code> package. It allows us to chain multiple operations instead of nesting them, which significantly improves readibilty, See the following example provided in the <a href="https://cran.r-project.org/web/packages/magrittr/vignettes/magrittr.html">package vignette</a>. The following two code blocks evaluate to the same result.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
+<span class="kw">library</span>(magrittr)
+car_data &lt;-<span class="st"> </span>
+<span class="st">  </span>mtcars %&gt;%
+<span class="st">  </span><span class="kw">subset</span>(hp &gt;<span class="st"> </span><span class="dv">100</span>) %&gt;%
+<span class="st">  </span><span class="kw">aggregate</span>(. ~<span class="st"> </span>cyl, <span class="dt">data =</span> ., <span class="dt">FUN =</span> . %&gt;%<span class="st"> </span>mean %&gt;%<span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>)) %&gt;%
+<span class="st">  </span><span class="kw">transform</span>(<span class="dt">kpl =</span> mpg %&gt;%<span class="st"> </span><span class="kw">multiply_by</span>(<span class="fl">0.4251</span>)) %&gt;%
+<span class="st">  </span>print
+
+<span class="co"># bad</span>
+car_data &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">transform</span>(<span class="kw">aggregate</span>(. ~<span class="st"> </span>cyl, 
+                      <span class="dt">data =</span> <span class="kw">subset</span>(mtcars, hp &gt;<span class="st"> </span><span class="dv">100</span>), 
+                      <span class="dt">FUN =</span> function(x) <span class="kw">round</span>(<span class="kw">mean</span>(x, <span class="dv">2</span>))), 
+            <span class="dt">kpl =</span> mpg*<span class="fl">0.4251</span>)</code></pre></div>
+<p>Formally, the pipe is defined as <code>x %&gt;% f(y) = f(x, y)</code>, that is, the first argument of a function following the pipe is always the output of the statement before the pipe. Hence, the verbal interpretation is best expressed with the word <em>then</em>. In the above case: take mtcars, <em>then</em> subset it with hp &gt; 100, <em>then</em>, aggregate the data, <em>then</em> transform it, and <em>then</em> return it. Also, the pipe can help you to avoid creating a lot of throwaway variables on the fly that you don’t need later on. The following two examples result in the same output.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scope &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">10</span>
+<span class="co"># good</span>
+max_of_min &lt;-
+<span class="st">  </span>scope %&gt;%
+<span class="st">  </span><span class="kw">min</span>() %&gt;%
+<span class="st">  </span><span class="kw">max</span>(<span class="dt">na.rm =</span> T)
+  
+<span class="co"># bad</span>
+min &lt;-<span class="st"> </span><span class="kw">min</span>(scope)
+max_of_min &lt;-<span class="st"> </span><span class="kw">max</span>(min, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>In this example, we only have one argument for the function <code>min</code>, which is transfered with the pipe, so there is no need to supply any argument. Of course, this example is trivial but it generalizes to more complex situations.</p>
+</div>
 </div>
 <div class="footnotes">
 <hr />

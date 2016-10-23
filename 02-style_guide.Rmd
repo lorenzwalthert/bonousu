@@ -403,13 +403,18 @@ if (x == TRUE){
 # .... 
 ```
 In many cases, you can use functions to avoid nesting, in certain cases, the 
-specific functions you want to create are *recursive functions*.^[See an example
+specific functions you want to use are functionals or the pipe. In more advanced
+settings, you might want to resort to *recursive functions*.^[See an example
 of how to compute a [fibbonacci series](http://adv-r.had.co.nz/Function-operators.html)]
+
+### Functionals
 A great way to get rid of nested code related to for loops is to replace them 
-with functionals. We do not want to dive into that further here, since Hadley 
+with functionals. However, not all nested code can be replaced with functionals. 
+We do not want to dive into that further here, since Hadley 
 Wickham's book [Advanced R](http://adv-r.had.co.nz/Functionals.html) covers the 
 material quite nicely. However, let us just quickly discuss an example in the 
-context of good style.
+context of good style. The task is to return the data types of each column 
+in the data frame `mtcars`.
 ```{r}
 # good
 lapply(mtcars, class)
@@ -437,18 +442,142 @@ vapply(x, function(r){
   }, character(1)) 
 ```
 
+### The pipe operator
+
+On a related note, we should mention the pipe (`%>%`), a function that was
+introduced in the `magrittr` package. It allows us to chain multiple operations
+instead of nesting them, which significantly improves readibilty, See the 
+following example provided in the [package vignette](https://cran.r-project.org/web/packages/magrittr/vignettes/magrittr.html). 
+The following two code blocks evaluate to the same result.
+```{r}
+# good
+library(magrittr)
+car_data <- 
+  mtcars %>%
+  subset(hp > 100) %>%
+  aggregate(. ~ cyl, data = ., FUN = . %>% mean %>% round(2)) %>%
+  transform(kpl = mpg %>% multiply_by(0.4251)) %>%
+  print
+
+# bad
+car_data <- 
+  transform(aggregate(. ~ cyl, 
+                      data = subset(mtcars, hp > 100), 
+                      FUN = function(x) round(mean(x, 2))), 
+            kpl = mpg*0.4251)
+
+```
+Formally, the pipe is defined as `x %>% f(y) = f(x, y)`, that is, the first 
+argument of a function following the pipe is always the output of the statement
+before the pipe. Hence, the verbal interpretation is best expressed with the 
+word *then*. In the above case: 
+take mtcars, *then* subset it with hp > 100, *then*, aggregate the data, *then* 
+transform it, and *then* return it. Also, the pipe can help you to avoid 
+creating a lot of throwaway variables on the fly that you don't need later on. The 
+following two examples result in the same output.
+```{r}
+scope <- 1:10
+# good
+max_of_min <-
+  scope %>%
+  min() %>%
+  max(na.rm = T)
+  
+# bad
+min <- min(scope)
+max_of_min <- max(min, na.rm = TRUE)
+```
+In this example, we only have one argument for the function `min`,
+which is transfered with the pipe, so there is no need to supply any argument. 
+Of course, this example is trivial but it generalizes to more complex situations.
+
+
+
 ## Conditional statements
 Much has been written about conditional statements. Since they are such an essential 
 element of R programming and programming in general, it should be part of this 
-book. In principal, R lets you write a whole *if-else-statement* in one line. 
-That is four times less than using the verbose form. In the light of these, 
-relationships, it might be ok to use the *one-liner* for very short statements.
-```{r, include = FALSE}
+book.
+
+### Booleans
+
+Boolean values `TRUE` and `FALSE` can be abreviated with `T` and `F`, but it is 
+bad practice since it is harder to spot them.
+```{r, eval = FALSE}
+# good
+if (cond == TRUE) xyz()
+# bad
+if (cond = F) xyz()
+```
+Boolean conditional statements can be abbreviated in the sense that they do not
+require a comparison counterpart. The following two
+*if statements* are identical, but the first is more explicit.
+```{r, eval = FALSE}
+# adviced
+if (cond == FALSE){
+  # do xyz
+}
+# discouraged
+if (!cond){
+  # do xyz
+}
+```
+
+The functions `any` and `all` are also helpful when it comes to conditional 
+statements. Writing `all(boolean) == TRUE)` might worsen 
+legibility, so we drop the comparison.
+```{r}
+boolean <- sample(c(TRUE, FALSE), 10, replace= TRUE)
+# good
+if (all(boolean)){
+  "all values are TRUE. That can't be true."
+} else if (any(boolean)){
+  "at least some values are TRUE. This is quite likely."
+} else {
+  "not a single TRUE value?"
+}
+```
+In some situations, booleans allow you to do away completely with conditional
+statements. Whether tend to advocate for this since the amount of lines used 
+with this approach is four times lower.
+```{r}
+y = 0
+k = 1
+boolean = TRUE
+
+# advised
+x <- k * boolean * sin(y)
+# discouraged
+if(boolean == TRUE) {
+  x <- k* sin(y)
+} else {
+  x <- 0
+}
+
+# advised
+sin(k * boolean)
+# discouraged
+if(boolean == TRUE) {
+  x <- sin(k)
+} else {
+  x <- sin(0)
+}
+
+```
+
+
+### Simplifying conditionals
+In principal, R lets you write a whole *if-else-statement* in one line. 
+That is five times less than using the verbose form. In the light of 
+these  relations, it might be ok to use the *one-liner* for very short statements.
+However, when the situation gets more complex, using a verbose form is adviced 
+to maintain code which is well understandable.
+
+```{r,  include = FALSE, results= 'hide'}
 fail <-    sample(c(TRUE, FALSE), 1)
 success <- sample(c(TRUE, FALSE), 1)
 ```
 
-```{r}
+```{r, results = 'hide', message= FALSE}
 # concise
 if (fail == TRUE) message("fail") else message("no fail")
 # verbose
@@ -461,10 +590,11 @@ if (fail == TRUE) {
 Especially for very short conditional statements, you might want to resort to 
 the function `ifelse`.
 ```{r}
-ifelse(fail == TRUE, 
-       yes = "the test did fail", 
-       no  = "the test did not fail")
+ifelse(fail, 
+       "the test did fail", 
+       "the test did not fail")
 ```
+
 `ifelse` can also take a vectorized input, which makes it even more useful to 
 eliminate loops.
 ```{r}
@@ -481,10 +611,60 @@ for (i in seq_along(x)){
   }
 }
 ```
-Note that double negation is not desirable in conditional statements, although
+
+An alternative to `ifelse` is the function `switch()` if the 
+condition is of class character, especially if there are many conditions to 
+test. Note that switch expects a match and returns an invisible `NULL` if the 
+condition does not match with any option given. Also, note that switch is not 
+particularly flexible since it uses non-standard evaluation and cannot handle 
+numeric input.^[i.e. replacing *fail* below with the scalar 1 would raise an error]
+
+```{r}
+outcome <- "excelled"
+switch(outcome, 
+       fail  = "the test did fail", 
+       just_passed = "lucky you",
+       passed = "the test did not fail",
+       excelled = "you must be Einstein")
+```
+
+*If statements* can also be used in other contexts:
+```{r}
+# good
+paste("the test did", if(fail == FALSE) "not", "fail")
+```
+A very verbose alternative would be:
+```{r}
+# bad
+if (fail == FALSE){
+  "the test did not fail"
+} else {
+  "the test did fail"
+}
+```
+If the duplication should be avoided, one needs to create a variable.
+```{r}
+# bad
+if (fail == FALSE){
+  msg <- "not"
+} else { 
+  msg <- NULL
+}
+paste("the test did", msg, "fail")
+rm(msg)
+```
+We do not claim that the warpping the conditional statement into a function like
+`paste` in every siutuation, but in the above case, it seems to make the code 
+more concise while not introducing confusion.
+
+### Formulation of conditions
+The very same conditions can be formulated in different ways. There are some 
+basic notions that are worth following.
+For example, note that double negation is not desirable in conditional 
+statements since it is quite confusing in some cases, although
 it technically works fine. Also, it seems quite natural to put a *true* condition
 first, or the condition that is expected to apply mostly.
-```{r}
+```{r, message = FALSE}
 # good
 if (fail == TRUE){
   message("the test failed")
@@ -495,9 +675,11 @@ if (fail != FALSE){
   message("the test failed")
 }
 ```
-Alternatively, you might want to define the variable `success = 1 - fail` 
+
+Alternatively, you might want to define the variable `success = !fail` 
 instead of `fail` in order to not get confused.
-```{r}
+
+```{r, eval = FALSE}
 # good 
 if (success == TRUE){
   message("the test succeeded")
@@ -508,51 +690,31 @@ if(fail != FALSE){
 }
 ```
 
-
-*If statements* can also be used in other contexts:
-```{r}
-paste("the test did", if(fail == FALSE) "not", "fail")
-```
-A very verbose alternative would be:
-```{r}
-if (fail == FALSE){
-  "the test did not fail"
-} else {
-  "the test did fail"
-}
-```
-If the duplication should be avoided, one needs to create a variable.
-```{r}
-if (fail == FALSE){
-  msg <- "not"
-} else { 
-  msg <- NULL
-}
-paste("the test did", msg, "fail")
-rm(msg)
-```
+### Conditional assignment
 When an assignment to a variable is conditional, the following is possible. 
 ```{r}
+# good
 x <- 
   if (fail == TRUE) {
     rpois(10, lambda = 2)
   } else {
     rnorm(10)
   }
+# bad
+if (fail == TRUE) {
+    x <- rpois(10, lambda = 2)
+  } else {
+    x<- rnorm(10)
+  }
 ```
-Boolean conditional statements can be abbreviated. The following two
-*if statements* are identical. 
-```{r, eval = FALSE}
-if (!cond){
-  # do xyz
-}
+Obviously, this only works for simple cases where values are asigned to only 
+one variable. It is advised in simple cases because it becomes evident very 
+quickly that the whole point of this conditional statement is assigning a value
+to `x`.
 
-if (cond == FALSE){
-  # do xyz
-}
-```
-The functions `any` and `all` are also helpful when it comes to conditional 
-statements. 
+### Avoiding redundancy
+Note that for conditional statements, the order matters if the 
+conditions are not mutually exclusive. 
 ```{r}
 boolean <- sample(c(TRUE, FALSE), 10, replace= TRUE)
 # good
@@ -564,8 +726,7 @@ if (all(boolean)){
   "not a single TRUE value?"
 }
 ```
-Note that for conditional statements, the order matters if the 
-conditions are not mutually exclusive. In other words, when all values in the 
+In other words, when all values in the 
 above example are `TRUE`, then also some are. So exchanging the *if* and the 
 *else if* statement will never print the message that all values are true, 
 because the first condition already applies. To fix that you could be tempted 
@@ -582,10 +743,16 @@ if (any(boolean) & !all(boolean)){
 Clearly changing the ordering of the conditional statements like this creates 
 redundancy and should thus be avoided.
 
-Also, lazy evaluation can be useful in combination with conditional statements.
+Also, lazy evaluation^[note that `&&` and `||` are the lazy equivalents of 
+`&` and `|`, i.e. using `&` in the below example would raise an error because 
+the second statement cannot be evaluated. With `&&` it does not get evaluated 
+because the first statement returns `FALSE`] can be useful in combination with 
+conditional statements.
 For example, you might want to so something within a function based on an input 
 value. However, you do not know whether the value was supplied in the first 
-place. Here are two ways to deal with that situation.
+place. Here are two ways to deal with that situation.^[If not used in the 
+context of a function, you might use `exists("x")` instead
+of `missing(x)`]
 ```{r, eval = FALSE}
 # good 
 if (!missing(x) && x > 10) {
@@ -598,20 +765,6 @@ if (!missing(x)){
   }
 }
 ```
-
-Finally, an alternative to *if statements* is the function `switch()` if the 
-condition is of class character, especially if there are many conditions to 
-test. Note that switch expects a match and returns an invisible `NULL` if the 
-condition does not match with any option given.
-```{r}
-outcome <- "excelled"
-switch(outcome, 
-       fail  = "the test did fail", 
-       just_passed = "lucky you",
-       passed = "the test did not fail",
-       excelled = "you must be Einstein")
-```
-
 
 ## Argument specification
 ```{r}

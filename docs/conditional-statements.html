@@ -115,8 +115,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.7.1" data-path="commenting-code.html"><a href="commenting-code.html#structuring-code"><i class="fa fa-check"></i><b>2.7.1</b> Structuring code</a></li>
 <li class="chapter" data-level="2.7.2" data-path="commenting-code.html"><a href="commenting-code.html#explaining-code"><i class="fa fa-check"></i><b>2.7.2</b> Explaining code</a></li>
 </ul></li>
-<li class="chapter" data-level="2.8" data-path="nested-code.html"><a href="nested-code.html"><i class="fa fa-check"></i><b>2.8</b> Nested code</a></li>
-<li class="chapter" data-level="2.9" data-path="conditional-statements.html"><a href="conditional-statements.html"><i class="fa fa-check"></i><b>2.9</b> Conditional statements</a></li>
+<li class="chapter" data-level="2.8" data-path="nested-code.html"><a href="nested-code.html"><i class="fa fa-check"></i><b>2.8</b> Nested code</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="nested-code.html"><a href="nested-code.html#functionals"><i class="fa fa-check"></i><b>2.8.1</b> Functionals</a></li>
+<li class="chapter" data-level="2.8.2" data-path="nested-code.html"><a href="nested-code.html#the-pipe-operator"><i class="fa fa-check"></i><b>2.8.2</b> The pipe operator</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="conditional-statements.html"><a href="conditional-statements.html"><i class="fa fa-check"></i><b>2.9</b> Conditional statements</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="conditional-statements.html"><a href="conditional-statements.html#booleans"><i class="fa fa-check"></i><b>2.9.1</b> Booleans</a></li>
+<li class="chapter" data-level="2.9.2" data-path="conditional-statements.html"><a href="conditional-statements.html#simplifying-conditionals"><i class="fa fa-check"></i><b>2.9.2</b> Simplifying conditionals</a></li>
+<li class="chapter" data-level="2.9.3" data-path="conditional-statements.html"><a href="conditional-statements.html#formulation-of-conditions"><i class="fa fa-check"></i><b>2.9.3</b> Formulation of conditions</a></li>
+<li class="chapter" data-level="2.9.4" data-path="conditional-statements.html"><a href="conditional-statements.html#conditional-assignment"><i class="fa fa-check"></i><b>2.9.4</b> Conditional assignment</a></li>
+<li class="chapter" data-level="2.9.5" data-path="conditional-statements.html"><a href="conditional-statements.html#avoiding-redundancy"><i class="fa fa-check"></i><b>2.9.5</b> Avoiding redundancy</a></li>
+</ul></li>
 <li class="chapter" data-level="2.10" data-path="argument-specification.html"><a href="argument-specification.html"><i class="fa fa-check"></i><b>2.10</b> Argument specification</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="workflow-collaboration.html"><a href="workflow-collaboration.html"><i class="fa fa-check"></i><b>3</b> Workflow &amp; collaboration</a></li>
@@ -140,21 +149,71 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="conditional-statements" class="section level2">
 <h2><span class="header-section-number">2.9</span> Conditional statements</h2>
-<p>Much has been written about conditional statements. Since they are such an essential element of R programming and programming in general, it should be part of this book. In principal, R lets you write a whole <em>if-else-statement</em> in one line. That is four times less than using the verbose form. In the light of these, relationships, it might be ok to use the <em>one-liner</em> for very short statements.</p>
+<p>Much has been written about conditional statements. Since they are such an essential element of R programming and programming in general, it should be part of this book.</p>
+<div id="booleans" class="section level3">
+<h3><span class="header-section-number">2.9.1</span> Booleans</h3>
+<p>Boolean values <code>TRUE</code> and <code>FALSE</code> can be abreviated with <code>T</code> and <code>F</code>, but it is bad practice since it is harder to spot them.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
+if (cond ==<span class="st"> </span><span class="ot">TRUE</span>) <span class="kw">xyz</span>()
+<span class="co"># bad</span>
+if (<span class="dt">cond =</span> F) <span class="kw">xyz</span>()</code></pre></div>
+<p>Boolean conditional statements can be abbreviated in the sense that they do not require a comparison counterpart. The following two <em>if statements</em> are identical, but the first is more explicit.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># adviced</span>
+if (cond ==<span class="st"> </span><span class="ot">FALSE</span>){
+  <span class="co"># do xyz</span>
+}
+<span class="co"># discouraged</span>
+if (!cond){
+  <span class="co"># do xyz</span>
+}</code></pre></div>
+<p>The functions <code>any</code> and <code>all</code> are also helpful when it comes to conditional statements. Writing <code>all(boolean) == TRUE)</code> might worsen legibility, so we drop the comparison.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boolean &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), <span class="dv">10</span>, <span class="dt">replace=</span> <span class="ot">TRUE</span>)
+<span class="co"># good</span>
+if (<span class="kw">all</span>(boolean)){
+  <span class="st">&quot;all values are TRUE. That can&#39;t be true.&quot;</span>
+} else if (<span class="kw">any</span>(boolean)){
+  <span class="st">&quot;at least some values are TRUE. This is quite likely.&quot;</span>
+} else {
+  <span class="st">&quot;not a single TRUE value?&quot;</span>
+}</code></pre></div>
+<p>In some situations, booleans allow you to do away completely with conditional statements. Whether tend to advocate for this since the amount of lines used with this approach is four times lower.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y =<span class="st"> </span><span class="dv">0</span>
+k =<span class="st"> </span><span class="dv">1</span>
+boolean =<span class="st"> </span><span class="ot">TRUE</span>
+
+<span class="co"># advised</span>
+x &lt;-<span class="st"> </span>k *<span class="st"> </span>boolean *<span class="st"> </span><span class="kw">sin</span>(y)
+<span class="co"># discouraged</span>
+if(boolean ==<span class="st"> </span><span class="ot">TRUE</span>) {
+  x &lt;-<span class="st"> </span>k*<span class="st"> </span><span class="kw">sin</span>(y)
+} else {
+  x &lt;-<span class="st"> </span><span class="dv">0</span>
+}
+
+<span class="co"># advised</span>
+<span class="kw">sin</span>(k *<span class="st"> </span>boolean)
+<span class="co"># discouraged</span>
+if(boolean ==<span class="st"> </span><span class="ot">TRUE</span>) {
+  x &lt;-<span class="st"> </span><span class="kw">sin</span>(k)
+} else {
+  x &lt;-<span class="st"> </span><span class="kw">sin</span>(<span class="dv">0</span>)
+}</code></pre></div>
+</div>
+<div id="simplifying-conditionals" class="section level3">
+<h3><span class="header-section-number">2.9.2</span> Simplifying conditionals</h3>
+<p>In principal, R lets you write a whole <em>if-else-statement</em> in one line. That is five times less than using the verbose form. In the light of these relations, it might be ok to use the <em>one-liner</em> for very short statements. However, when the situation gets more complex, using a verbose form is adviced to maintain code which is well understandable.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># concise</span>
-if (fail ==<span class="st"> </span><span class="ot">TRUE</span>) <span class="kw">message</span>(<span class="st">&quot;fail&quot;</span>) else <span class="kw">message</span>(<span class="st">&quot;no fail&quot;</span>)</code></pre></div>
-<pre><code>## fail</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># verbose</span>
+if (fail ==<span class="st"> </span><span class="ot">TRUE</span>) <span class="kw">message</span>(<span class="st">&quot;fail&quot;</span>) else <span class="kw">message</span>(<span class="st">&quot;no fail&quot;</span>)
+<span class="co"># verbose</span>
 if (fail ==<span class="st"> </span><span class="ot">TRUE</span>) {
   <span class="kw">message</span>(<span class="st">&quot;fail&quot;</span>) 
 } else {
   <span class="kw">message</span>(<span class="st">&quot;no fail&quot;</span>)
 }</code></pre></div>
-<pre><code>## fail</code></pre>
 <p>Especially for very short conditional statements, you might want to resort to the function <code>ifelse</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ifelse</span>(fail ==<span class="st"> </span><span class="ot">TRUE</span>, 
-       <span class="dt">yes =</span> <span class="st">&quot;the test did fail&quot;</span>, 
-       <span class="dt">no  =</span> <span class="st">&quot;the test did not fail&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ifelse</span>(fail, 
+       <span class="st">&quot;the test did fail&quot;</span>, 
+       <span class="st">&quot;the test did not fail&quot;</span>)</code></pre></div>
 <p><code>ifelse</code> can also take a vectorized input, which makes it even more useful to eliminate loops.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>-<span class="dv">3</span>:<span class="dv">4</span>
 <span class="co"># good</span>
@@ -168,60 +227,77 @@ for (i in <span class="kw">seq_along</span>(x)){
     <span class="kw">print</span>(<span class="kw">sqrt</span>(x[i]))
   }
 }</code></pre></div>
-<p>Note that double negation is not desirable in conditional statements, although it technically works fine. Also, it seems quite natural to put a <em>true</em> condition first, or the condition that is expected to apply mostly.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
-if (fail ==<span class="st"> </span><span class="ot">TRUE</span>){
-  <span class="kw">message</span>(<span class="st">&quot;the test failed&quot;</span>)
-}</code></pre></div>
-<pre><code>## the test failed</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># bad</span>
-if (fail !=<span class="st"> </span><span class="ot">FALSE</span>){
-  <span class="kw">message</span>(<span class="st">&quot;the test failed&quot;</span>)
-}</code></pre></div>
-<pre><code>## the test failed</code></pre>
-<p>Alternatively, you might want to define the variable <code>success = 1 - fail</code> instead of <code>fail</code> in order to not get confused.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good </span>
-if (success ==<span class="st"> </span><span class="ot">TRUE</span>){
-  <span class="kw">message</span>(<span class="st">&quot;the test succeeded&quot;</span>)
-}</code></pre></div>
-<pre><code>## the test succeeded</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># bad</span>
-if(fail !=<span class="st"> </span><span class="ot">FALSE</span>){
-  <span class="kw">message</span>(<span class="st">&quot;the test did not succeede&quot;</span>)
-}</code></pre></div>
-<pre><code>## the test did not succeede</code></pre>
+<p>An alternative to <code>ifelse</code> is the function <code>switch()</code> if the condition is of class character, especially if there are many conditions to test. Note that switch expects a match and returns an invisible <code>NULL</code> if the condition does not match with any option given. Also, note that switch is not particularly flexible since it uses non-standard evaluation and cannot handle numeric input.<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">outcome &lt;-<span class="st"> &quot;excelled&quot;</span>
+switch(outcome, 
+       <span class="dt">fail  =</span> <span class="st">&quot;the test did fail&quot;</span>, 
+       <span class="dt">just_passed =</span> <span class="st">&quot;lucky you&quot;</span>,
+       <span class="dt">passed =</span> <span class="st">&quot;the test did not fail&quot;</span>,
+       <span class="dt">excelled =</span> <span class="st">&quot;you must be Einstein&quot;</span>)</code></pre></div>
 <p><em>If statements</em> can also be used in other contexts:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;the test did&quot;</span>, if(fail ==<span class="st"> </span><span class="ot">FALSE</span>) <span class="st">&quot;not&quot;</span>, <span class="st">&quot;fail&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
+<span class="kw">paste</span>(<span class="st">&quot;the test did&quot;</span>, if(fail ==<span class="st"> </span><span class="ot">FALSE</span>) <span class="st">&quot;not&quot;</span>, <span class="st">&quot;fail&quot;</span>)</code></pre></div>
 <p>A very verbose alternative would be:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if (fail ==<span class="st"> </span><span class="ot">FALSE</span>){
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># bad</span>
+if (fail ==<span class="st"> </span><span class="ot">FALSE</span>){
   <span class="st">&quot;the test did not fail&quot;</span>
 } else {
   <span class="st">&quot;the test did fail&quot;</span>
 }</code></pre></div>
 <p>If the duplication should be avoided, one needs to create a variable.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if (fail ==<span class="st"> </span><span class="ot">FALSE</span>){
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># bad</span>
+if (fail ==<span class="st"> </span><span class="ot">FALSE</span>){
   msg &lt;-<span class="st"> &quot;not&quot;</span>
 } else { 
   msg &lt;-<span class="st"> </span><span class="ot">NULL</span>
 }
 <span class="kw">paste</span>(<span class="st">&quot;the test did&quot;</span>, msg, <span class="st">&quot;fail&quot;</span>)
 <span class="kw">rm</span>(msg)</code></pre></div>
+<p>We do not claim that the warpping the conditional statement into a function like <code>paste</code> in every siutuation, but in the above case, it seems to make the code more concise while not introducing confusion.</p>
+</div>
+<div id="formulation-of-conditions" class="section level3">
+<h3><span class="header-section-number">2.9.3</span> Formulation of conditions</h3>
+<p>The very same conditions can be formulated in different ways. There are some basic notions that are worth following. For example, note that double negation is not desirable in conditional statements since it is quite confusing in some cases, although it technically works fine. Also, it seems quite natural to put a <em>true</em> condition first, or the condition that is expected to apply mostly.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
+if (fail ==<span class="st"> </span><span class="ot">TRUE</span>){
+  <span class="kw">message</span>(<span class="st">&quot;the test failed&quot;</span>)
+}
+
+<span class="co"># bad</span>
+if (fail !=<span class="st"> </span><span class="ot">FALSE</span>){
+  <span class="kw">message</span>(<span class="st">&quot;the test failed&quot;</span>)
+}</code></pre></div>
+<p>Alternatively, you might want to define the variable <code>success = !fail</code> instead of <code>fail</code> in order to not get confused.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good </span>
+if (success ==<span class="st"> </span><span class="ot">TRUE</span>){
+  <span class="kw">message</span>(<span class="st">&quot;the test succeeded&quot;</span>)
+}
+<span class="co"># bad</span>
+if(fail !=<span class="st"> </span><span class="ot">FALSE</span>){
+  <span class="kw">message</span>(<span class="st">&quot;the test did not succeede&quot;</span>)
+}</code></pre></div>
+</div>
+<div id="conditional-assignment" class="section level3">
+<h3><span class="header-section-number">2.9.4</span> Conditional assignment</h3>
 <p>When an assignment to a variable is conditional, the following is possible.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good</span>
+x &lt;-<span class="st"> </span>
 <span class="st">  </span>if (fail ==<span class="st"> </span><span class="ot">TRUE</span>) {
     <span class="kw">rpois</span>(<span class="dv">10</span>, <span class="dt">lambda =</span> <span class="dv">2</span>)
   } else {
     <span class="kw">rnorm</span>(<span class="dv">10</span>)
+  }
+<span class="co"># bad</span>
+if (fail ==<span class="st"> </span><span class="ot">TRUE</span>) {
+    x &lt;-<span class="st"> </span><span class="kw">rpois</span>(<span class="dv">10</span>, <span class="dt">lambda =</span> <span class="dv">2</span>)
+  } else {
+    x&lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10</span>)
   }</code></pre></div>
-<p>Boolean conditional statements can be abbreviated. The following two <em>if statements</em> are identical.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if (!cond){
-  <span class="co"># do xyz</span>
-}
-
-if (cond ==<span class="st"> </span><span class="ot">FALSE</span>){
-  <span class="co"># do xyz</span>
-}</code></pre></div>
-<p>The functions <code>any</code> and <code>all</code> are also helpful when it comes to conditional statements.</p>
+<p>Obviously, this only works for simple cases where values are asigned to only one variable. It is advised in simple cases because it becomes evident very quickly that the whole point of this conditional statement is assigning a value to <code>x</code>.</p>
+</div>
+<div id="avoiding-redundancy" class="section level3">
+<h3><span class="header-section-number">2.9.5</span> Avoiding redundancy</h3>
+<p>Note that for conditional statements, the order matters if the conditions are not mutually exclusive.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boolean &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), <span class="dv">10</span>, <span class="dt">replace=</span> <span class="ot">TRUE</span>)
 <span class="co"># good</span>
 if (<span class="kw">all</span>(boolean)){
@@ -231,7 +307,7 @@ if (<span class="kw">all</span>(boolean)){
 } else {
   <span class="st">&quot;not a single TRUE value?&quot;</span>
 }</code></pre></div>
-<p>Note that for conditional statements, the order matters if the conditions are not mutually exclusive. In other words, when all values in the above example are <code>TRUE</code>, then also some are. So exchanging the <em>if</em> and the <em>else if</em> statement will never print the message that all values are true, because the first condition already applies. To fix that you could be tempted to do the following:</p>
+<p>In other words, when all values in the above example are <code>TRUE</code>, then also some are. So exchanging the <em>if</em> and the <em>else if</em> statement will never print the message that all values are true, because the first condition already applies. To fix that you could be tempted to do the following:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if (<span class="kw">any</span>(boolean) &amp;<span class="st"> </span>!<span class="kw">all</span>(boolean)){
   <span class="st">&quot;at least some values are TRUE. This is quite likely.&quot;</span>
 } else if (<span class="kw">all</span>(boolean)){
@@ -240,7 +316,7 @@ if (<span class="kw">all</span>(boolean)){
   <span class="st">&quot;not a single TRUE value?&quot;</span>
 }</code></pre></div>
 <p>Clearly changing the ordering of the conditional statements like this creates redundancy and should thus be avoided.</p>
-<p>Also, lazy evaluation can be useful in combination with conditional statements. For example, you might want to so something within a function based on an input value. However, you do not know whether the value was supplied in the first place. Here are two ways to deal with that situation.</p>
+<p>Also, lazy evaluation<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a> can be useful in combination with conditional statements. For example, you might want to so something within a function based on an input value. However, you do not know whether the value was supplied in the first place. Here are two ways to deal with that situation.<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># good </span>
 if (!<span class="kw">missing</span>(x) &amp;&amp;<span class="st"> </span>x &gt;<span class="st"> </span><span class="dv">10</span>) {
   <span class="co"># your code</span>
@@ -251,13 +327,15 @@ if (!<span class="kw">missing</span>(x)){
    <span class="co"># your code </span>
   }
 }</code></pre></div>
-<p>Finally, an alternative to <em>if statements</em> is the function <code>switch()</code> if the condition is of class character, especially if there are many conditions to test. Note that switch expects a match and returns an invisible <code>NULL</code> if the condition does not match with any option given.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">outcome &lt;-<span class="st"> &quot;excelled&quot;</span>
-switch(outcome, 
-       <span class="dt">fail  =</span> <span class="st">&quot;the test did fail&quot;</span>, 
-       <span class="dt">just_passed =</span> <span class="st">&quot;lucky you&quot;</span>,
-       <span class="dt">passed =</span> <span class="st">&quot;the test did not fail&quot;</span>,
-       <span class="dt">excelled =</span> <span class="st">&quot;you must be Einstein&quot;</span>)</code></pre></div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="6">
+<li id="fn6"><p>i.e. replacing <em>fail</em> below with the scalar 1 would raise an error<a href="conditional-statements.html#fnref6">↩</a></p></li>
+<li id="fn7"><p>note that <code>&amp;&amp;</code> and <code>||</code> are the lazy equivalents of <code>&amp;</code> and <code>|</code>, i.e. using <code>&amp;</code> in the below example would raise an error because the second statement cannot be evaluated. With <code>&amp;&amp;</code> it does not get evaluated because the first statement returns <code>FALSE</code><a href="conditional-statements.html#fnref7">↩</a></p></li>
+<li id="fn8"><p>If not used in the context of a function, you might use <code>exists(&quot;x&quot;)</code> instead of <code>missing(x)</code><a href="conditional-statements.html#fnref8">↩</a></p></li>
+</ol>
 </div>
             </section>
 
